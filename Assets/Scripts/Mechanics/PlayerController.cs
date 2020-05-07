@@ -37,7 +37,7 @@ namespace Platformer.Mechanics
         /// <summary>
         /// Dash speed boost.
         /// </summary>
-        public float dashBoost = 10f;
+        private float dashBoost = 2f;
 
         /// <summary>
         /// Dash decay.
@@ -94,11 +94,10 @@ namespace Platformer.Mechanics
                 if (Input.GetButtonDown("Dash") && this.IsGrounded && dashState == DashState.NotDashing)
                 {
                     dashState = DashState.PrepareToDash;
-                    //dash = true;
                 }
                 else if (Input.GetButtonUp("Dash"))
                 {
-                    dash = false;
+                    stopDash = true;
                 }
             }
             else
@@ -155,8 +154,11 @@ namespace Platformer.Mechanics
                     dashState = DashState.InDash;
                     break;
                 case DashState.InDash:
-                    //Schedule<PlayerLanded>().player = this;
-                    dashState = DashState.DoneDashing;
+                    if (currentDashVelocity == 0)
+                    {
+                        //Schedule<PlayerLanded>().player = this;
+                        dashState = DashState.DoneDashing;
+                    }
                     break;
                 case DashState.DoneDashing:
                     dashState = DashState.NotDashing;
@@ -185,6 +187,12 @@ namespace Platformer.Mechanics
                 currentDashVelocity = dashBoost;
                 dash = false;
             }
+            else if (stopDash)
+            {
+                currentDashVelocity = 0;
+            }
+
+            float tempDashVelocity = currentDashVelocity;
 
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
@@ -193,26 +201,41 @@ namespace Platformer.Mechanics
 
             if (currentDashVelocity != 0)
             {
-                if (move.x == 0)
+                if (IsGrounded)
                 {
-                    if (spriteRenderer.flipX)
-                        velocity.x -= currentDashVelocity;
-                    else
-                        velocity.x += currentDashVelocity;
+                    currentDashVelocity = Mathf.Clamp(currentDashVelocity * 0.98f, 0, dashBoost);
+                    if (currentDashVelocity < 0.1 * dashBoost)
+                        currentDashVelocity = 0;
                 }
-                else if (move.x > 0)
-                    velocity.x += currentDashVelocity;
-                else if (move.x < 0)
-                    velocity.x -= currentDashVelocity;
+                else
+                {
+                    currentDashVelocity = 1f * dashBoost;
+                    tempDashVelocity = Mathf.Clamp(currentDashVelocity + move.x, 0, currentDashVelocity);
+                }
+                if (spriteRenderer.flipX)
+                    tempDashVelocity = -tempDashVelocity;
+                //if (move.x == 0)
+                //{
+                //    if (spriteRenderer.flipX)
+                //        velocity.x -= currentDashVelocity;
+                //    else
+                //        velocity.x += currentDashVelocity;
+                //}
+                //else if (move.x > 0)
+                //    velocity.x += currentDashVelocity;
+                //else if (move.x < 0)
+                //    velocity.x -= currentDashVelocity;
+
             }
 
+            velocity.x += currentDashVelocity;
 
             animator.SetBool("grounded", IsGrounded);
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
-            UnityEngine.Debug.Log($"Velocity = ({velocity.x},{velocity.y}");
+            UnityEngine.Debug.Log($"Velocity = {tempDashVelocity}");
 
-            Vector2 finalMove = new Vector2(move.x + velocity.x, move.y);
+            Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
             //if (dash)
             //{
             //    if (finalMove.x == 0)
