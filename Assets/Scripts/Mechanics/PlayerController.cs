@@ -204,13 +204,12 @@ namespace Platformer.Mechanics
                 if (IsGrounded)
                 {
                     currentDashVelocity = Mathf.Clamp(currentDashVelocity * 0.98f, 0, dashBoost);
-                    if (currentDashVelocity < 0.1 * dashBoost)
+                    if (currentDashVelocity < 0.7 * dashBoost)
                         currentDashVelocity = 0;
                 }
                 else
                 {
-                    currentDashVelocity = 1f * dashBoost;
-                    tempDashVelocity = Mathf.Clamp(currentDashVelocity + move.x, 0, currentDashVelocity);
+                    tempDashVelocity = Mathf.Abs(move.x * 2);
                 }
                 if (spriteRenderer.flipX)
                     tempDashVelocity = -tempDashVelocity;
