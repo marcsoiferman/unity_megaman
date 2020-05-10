@@ -40,6 +40,11 @@ namespace Platformer.Mechanics
         public float dashAirBoost = 2f;
 
         /// <summary>
+        /// Dash Duration (# of game ticks).
+        /// </summary>
+        public int dashDuration = 15;
+
+        /// <summary>
         /// Dash decay (% remaining per game tick).
         /// </summary>
         public float dashDecay = 0.98f;
@@ -50,6 +55,7 @@ namespace Platformer.Mechanics
         public float dashFloor = 0.7f;
 
         private float currentDashVelocity = 0;
+        public int currentDashDuration = 0;
 
         public JumpState jumpState = JumpState.Grounded;
         public DashState dashState = DashState.NotDashing;
@@ -131,6 +137,9 @@ namespace Platformer.Mechanics
                     {
                         Schedule<PlayerLanded>().player = this;
                         jumpState = JumpState.Landed;
+                        dashState = DashState.NotDashing;
+                        currentDashDuration = 0;
+                        currentDashVelocity = 0;
                     }
                     break;
                 case JumpState.Landed:
@@ -185,6 +194,7 @@ namespace Platformer.Mechanics
             if (dash)
             {
                 currentDashVelocity = dashBoost;
+                currentDashDuration = dashDuration;
                 dash = false;
             }
             else if (stopDash)
@@ -199,12 +209,14 @@ namespace Platformer.Mechanics
             else if (move.x < -0.01f)
                 spriteRenderer.flipX = true;
 
-            if (currentDashVelocity != 0)
+            if (currentDashDuration != 0)
             {
                 if (IsGrounded)
                 {
-                    currentDashVelocity = Mathf.Clamp(currentDashVelocity * dashDecay, 0, dashBoost);
-                    if (currentDashVelocity < dashFloor * dashBoost)
+                    if (currentDashDuration < 0.5 * dashDuration)
+                        currentDashVelocity *= dashDecay;
+                    currentDashDuration--;
+                    if (currentDashDuration <= 0)
                         currentDashVelocity = 0;
                 }
                 else
@@ -218,6 +230,7 @@ namespace Platformer.Mechanics
             velocity.x += currentDashVelocity;
 
             animator.SetBool("grounded", IsGrounded);
+            animator.SetBool("dashing", dashState != DashState.NotDashing);
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
