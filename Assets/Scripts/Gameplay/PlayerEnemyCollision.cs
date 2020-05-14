@@ -47,8 +47,7 @@ namespace Platformer.Gameplay
             else
             {
                 var playerHealth = player.GetComponent<Health>();
-                player.animator.SetTrigger("hurt");
-                player.audioSource.PlayOneShot(player.ouchAudio);
+                player.Damage();
                 playerHealth.Decrement();
             }
         }

@@ -104,6 +104,12 @@ namespace Platformer.Mechanics
             }
         }
 
+        public void Damage()
+        {
+            animator.SetTrigger("hurt");
+            audioSource.PlayOneShot(ouchAudio);
+        }
+
         protected override void ComputeVelocity()
         {
             if (jump && IsGrounded)
