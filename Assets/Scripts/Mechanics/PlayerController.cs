@@ -21,11 +21,19 @@ namespace Platformer.Mechanics
 
         public Scoreboard_Script _scoreboard;
 
+        #region score
         internal void UpdateScore(int v)
         {
             _scoreboard.UpdateScore(v);
         }
-          
+
+        internal void ResetScore()
+        {
+            _scoreboard.ResetScore();
+        }
+
+        #endregion
+
         /// <summary>
         /// Max horizontal speed of the player.
         /// </summary>
@@ -36,6 +44,7 @@ namespace Platformer.Mechanics
         public float jumpTakeOffSpeed = 7;
 
         public JumpState jumpState = JumpState.Grounded;
+
         private bool stopJump;
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;

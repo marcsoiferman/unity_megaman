@@ -1,3 +1,4 @@
+using Assets.Scripts.Gameplay;
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
@@ -30,6 +31,7 @@ namespace Platformer.Gameplay
                     enemyHealth.Decrement();
                     if (!enemyHealth.IsAlive)
                     {
+                        player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
                         Schedule<EnemyDeath>().enemy = enemy;
                         player.Bounce(2);
                     }
@@ -40,6 +42,7 @@ namespace Platformer.Gameplay
                 }
                 else
                 {
+                    player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
                     Schedule<EnemyDeath>().enemy = enemy;
                     player.Bounce(2);
                 }

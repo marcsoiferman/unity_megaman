@@ -19,7 +19,7 @@ public class Scoreboard_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreboard.text = "Score = " + scoreValue;
+        scoreboard.text = scoreValue.ToString("0000000");
     }
 
     internal void UpdateScore(int v)
