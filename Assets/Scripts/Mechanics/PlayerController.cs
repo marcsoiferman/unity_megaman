@@ -167,10 +167,20 @@ namespace Platformer.Mechanics
             }
         }
 
-        public void Damage()
+        public void PlayDamageAnimation()
         {
             animator.SetTrigger("hurt");
             audioSource.PlayOneShot(ouchAudio);
+        }
+
+        public void Damage(int amount = 1)
+        {
+            health.Decrement(amount);
+            if (!health.IsAlive)
+            {
+                var ev = Schedule<HealthIsZero>();
+                ev.health = health;
+            }
         }
 
         void UpdateDashState()
