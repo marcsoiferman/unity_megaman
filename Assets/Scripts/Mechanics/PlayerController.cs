@@ -7,6 +7,8 @@ using Platformer.Model;
 using Platformer.Core;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using System.Diagnostics;
 
 namespace Platformer.Mechanics
 {
@@ -29,13 +31,44 @@ namespace Platformer.Mechanics
         /// </summary>
         public float jumpTakeOffSpeed = 7;
 
+        /// <summary>
+        /// Dash speed boost.
+        /// </summary>
+        public float dashBoost = 2f;
+
+        /// <summary>
+        /// Dash speed boost in the air (doesn't decay).
+        /// </summary>
+        public float dashAirBoost = 2f;
+
+        /// <summary>
+        /// Dash Duration (# of game ticks).
+        /// </summary>
+        public int dashDuration = 15;
+
+        /// <summary>
+        /// Dash decay (% remaining per game tick).
+        /// </summary>
+        public float dashDecay = 0.98f;
+
+        /// <summary>
+        /// % of decay that needs to happen for dash to end.
+        /// </summary>
+        public float dashFloor = 0.7f;
+
+        private float currentDashVelocity = 0;
+        public int currentDashDuration = 0;
+
         public JumpState jumpState = JumpState.Grounded;
+        public DashState dashState = DashState.NotDashing;
+        private bool stopDash;
         private bool stopJump;
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
 
+        public bool dash;
         bool jump;
         Vector2 move;
         SpriteRenderer spriteRenderer;
@@ -65,12 +98,22 @@ namespace Platformer.Mechanics
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
                 }
+
+                if (Input.GetButtonDown("Dash") && this.IsGrounded && dashState == DashState.NotDashing)
+                {
+                    dashState = DashState.PrepareToDash;
+                }
+                else if (Input.GetButtonUp("Dash"))
+                {
+                    stopDash = true;
+                }
             }
             else
             {
                 move.x = 0;
             }
             UpdateJumpState();
+            UpdateDashState();
             base.Update();
         }
 
@@ -96,6 +139,9 @@ namespace Platformer.Mechanics
                     {
                         Schedule<PlayerLanded>().player = this;
                         jumpState = JumpState.Landed;
+                        dashState = DashState.NotDashing;
+                        currentDashDuration = 0;
+                        currentDashVelocity = 0;
                     }
                     break;
                 case JumpState.Landed:
@@ -108,6 +154,33 @@ namespace Platformer.Mechanics
         {
             animator.SetTrigger("hurt");
             audioSource.PlayOneShot(ouchAudio);
+        }
+
+        void UpdateDashState()
+        {
+            dash = false;
+            switch (dashState)
+            {
+                case DashState.PrepareToDash:
+                    dashState = DashState.Dashing;
+                    dash = true;
+                    stopDash = false;
+                    break;
+                case DashState.Dashing:
+                    //Schedule<PlayerJumped>().player = this;
+                    dashState = DashState.InDash;
+                    break;
+                case DashState.InDash:
+                    if (currentDashVelocity == 0)
+                    {
+                        //Schedule<PlayerLanded>().player = this;
+                        dashState = DashState.DoneDashing;
+                    }
+                    break;
+                case DashState.DoneDashing:
+                    dashState = DashState.NotDashing;
+                    break;
+            }
         }
 
         protected override void ComputeVelocity()
@@ -126,15 +199,50 @@ namespace Platformer.Mechanics
                 }
             }
 
+            if (dash)
+            {
+                currentDashVelocity = dashBoost;
+                currentDashDuration = dashDuration;
+                dash = false;
+            }
+            else if (stopDash)
+            {
+                currentDashVelocity = 0;
+            }
+
+            float tempDashVelocity = currentDashVelocity;
+
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
             else if (move.x < -0.01f)
                 spriteRenderer.flipX = true;
 
+            if (currentDashDuration != 0)
+            {
+                if (IsGrounded)
+                {
+                    if (currentDashDuration < 0.5 * dashDuration)
+                        currentDashVelocity *= dashDecay;
+                    currentDashDuration--;
+                    if (currentDashDuration <= 0)
+                        currentDashVelocity = 0;
+                }
+                else
+                {
+                    tempDashVelocity = Mathf.Abs(move.x * dashAirBoost);
+                }
+                if (spriteRenderer.flipX)
+                    tempDashVelocity = -tempDashVelocity;
+            }
+
+            velocity.x += currentDashVelocity;
+
             animator.SetBool("grounded", IsGrounded);
+            animator.SetBool("dashing", dashState != DashState.NotDashing);
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
-            targetVelocity = move * maxSpeed;
+            Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
+            targetVelocity = finalMove * maxSpeed;
         }
 
         public enum JumpState
@@ -144,6 +252,15 @@ namespace Platformer.Mechanics
             Jumping,
             InFlight,
             Landed
+        }
+
+        public enum DashState
+        {
+            NotDashing,
+            PrepareToDash,
+            Dashing,
+            InDash,
+            DoneDashing
         }
     }
 }
