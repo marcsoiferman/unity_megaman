@@ -38,6 +38,18 @@ namespace Platformer.Mechanics
             }
         }
 
+        public void Respawn()
+        {
+            if (tokens.Length == 0)
+                FindAllTokensInScene();
+            //Register all tokens so they can work with this controller.
+            for (var i = 0; i < tokens.Length; i++)
+            {
+                tokens[i].Respawn();
+
+            }
+        }
+
         void Update()
         {
             //if it's time for the next frame...
@@ -54,7 +66,7 @@ namespace Platformer.Mechanics
                         if (token.collected && token.frame == token.sprites.Length - 1)
                         {
                             token.gameObject.SetActive(false);
-                            tokens[i] = null;
+                            //tokens[i] = null;
                         }
                         else
                         {

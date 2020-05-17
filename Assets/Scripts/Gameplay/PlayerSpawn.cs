@@ -1,6 +1,9 @@
+using Boo.Lang;
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
+using System;
+using UnityEngine;
 
 namespace Platformer.Gameplay
 {
@@ -26,6 +29,8 @@ namespace Platformer.Gameplay
             model.virtualCamera.m_LookAt = player.transform;
             Simulation.Schedule<EnablePlayerInput>(2f);
             player.ResetScore();
+            player.NotifyRespawn();
+
         }
     }
 }

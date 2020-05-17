@@ -41,6 +41,12 @@ namespace Platformer.Mechanics
         /// Max horizontal speed of the player.
         /// </summary>
         public float maxSpeed = 7;
+
+        internal void NotifyRespawn()
+        {
+            OnRespawn?.Invoke();
+        }
+
         /// <summary>
         /// Initial jump velocity at the start of a jump.
         /// </summary>
@@ -93,6 +99,8 @@ namespace Platformer.Mechanics
 
         public Bounds Bounds => collider2d.bounds;
 
+        public event Action OnRespawn;
+            
         void Awake()
         {
             health = GetComponent<Health>();

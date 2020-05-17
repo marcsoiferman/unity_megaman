@@ -1,5 +1,6 @@
 using Platformer.Core;
 using Platformer.Model;
+using System;
 using UnityEngine;
 
 namespace Platformer.Mechanics
@@ -23,6 +24,13 @@ namespace Platformer.Mechanics
         void OnEnable()
         {
             Instance = this;
+            model.player.OnRespawn += RespawnWorld;
+        }
+
+        private void RespawnWorld()
+        {
+            TokenController controller = GetComponent<TokenController>();
+            controller.Respawn();
         }
 
         void OnDisable()
