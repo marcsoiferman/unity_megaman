@@ -5,6 +5,7 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using System;
 
 namespace Platformer.Mechanics
 {
@@ -18,6 +19,13 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
+        public Scoreboard_Script _scoreboard;
+
+        internal void UpdateScore(int v)
+        {
+            _scoreboard.UpdateScore(v);
+        }
+          
         /// <summary>
         /// Max horizontal speed of the player.
         /// </summary>
