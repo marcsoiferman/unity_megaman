@@ -5,6 +5,8 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using UnityEngine.UI;
+using TMPro;
 using System;
 using System.Diagnostics;
 
@@ -146,6 +148,12 @@ namespace Platformer.Mechanics
                     jumpState = JumpState.Grounded;
                     break;
             }
+        }
+
+        public void Damage()
+        {
+            animator.SetTrigger("hurt");
+            audioSource.PlayOneShot(ouchAudio);
         }
 
         void UpdateDashState()

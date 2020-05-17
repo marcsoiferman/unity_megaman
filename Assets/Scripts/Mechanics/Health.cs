@@ -20,7 +20,15 @@ namespace Platformer.Mechanics
         /// </summary>
         public bool IsAlive => currentHP > 0;
 
-        int currentHP;
+        public int currentHP;
+
+        /// <summary>
+        /// Reset the HP of the entity on respawn.
+        /// </summary>
+        public void Respawn()
+        {
+            currentHP = maxHP;
+        }
 
         /// <summary>
         /// Increment the HP of the entity.

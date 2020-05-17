@@ -36,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Health Bar
   m_SortingLayers:
   - name: Default
     uniqueID: 0

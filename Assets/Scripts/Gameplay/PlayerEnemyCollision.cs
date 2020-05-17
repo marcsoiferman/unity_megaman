@@ -46,7 +46,9 @@ namespace Platformer.Gameplay
             }
             else
             {
-                Schedule<PlayerDeath>();
+                var playerHealth = player.GetComponent<Health>();
+                player.Damage();
+                playerHealth.Decrement();
             }
         }
     }
