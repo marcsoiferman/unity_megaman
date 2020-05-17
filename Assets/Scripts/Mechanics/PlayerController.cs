@@ -84,6 +84,8 @@ namespace Platformer.Mechanics
         public Health health;
         public bool controlEnabled = true;
 
+        public bool facingRight = true;
+
         public bool dash;
         bool jump;
         Vector2 move;
@@ -117,8 +119,6 @@ namespace Platformer.Mechanics
 
                 if (Input.GetButtonDown("Dash") && this.IsGrounded && dashState == DashState.NotDashing)
                 {
-                    UnityEngine.Debug.Log("Dash Duration: " + dashDuration);
-                    UnityEngine.Debug.Log("Dash Boost: " + dashBoost);
                     dashState = DashState.PrepareToDash;
                 }
                 else if (Input.GetButtonUp("Dash"))
@@ -217,7 +217,6 @@ namespace Platformer.Mechanics
             {
                 if (IsGrounded)
                 {
-                    UnityEngine.Debug.Log($"Dash Duration {currentDashDuration}, Timestamp: {System.DateTime.Now.Ticks}");
                     if (currentDashDuration < 0.5 * dashDuration)
                         currentDashVelocity *= dashDecay;
                     currentDashDuration--;
@@ -228,7 +227,7 @@ namespace Platformer.Mechanics
                 {
                     tempDashVelocity = Mathf.Abs(move.x * dashAirBoost);
                 }
-                if (spriteRenderer.flipX)
+                if (!facingRight)
                     tempDashVelocity = -tempDashVelocity;
             }
 
@@ -254,10 +253,8 @@ namespace Platformer.Mechanics
 
             velocity.x += currentDashVelocity;
 
-            if (move.x > 0.01f)
-                spriteRenderer.flipX = false;
-            else if (move.x < -0.01f)
-                spriteRenderer.flipX = true;
+            if (move.x != 0)
+                UpdateFacingRight(move.x > 0.01f);
 
             animator.SetBool("grounded", IsGrounded);
             animator.SetBool("dashing", dashState != DashState.NotDashing);
@@ -265,6 +262,21 @@ namespace Platformer.Mechanics
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
             targetVelocity = finalMove * maxSpeed;
+        }
+
+        private void UpdateFacingRight(bool newValue)
+        {
+            if (facingRight == newValue)
+                return;
+
+            Flip();
+            facingRight = newValue;
+            //spriteRenderer.flipX = !facingRight;
+        }
+
+        private void Flip()
+        {
+            transform.Rotate(0f, 180f, 0f);
         }
 
         public enum JumpState
