@@ -63,7 +63,6 @@ namespace Platformer.Mechanics
                 player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
                 Schedule<EnemyDeath>().enemy = this;
             }
-
         }
 
         public bool IsAlive => health.IsAlive;

@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
 {
     public float Speed = 20f;
     public Rigidbody2D rigidBody;
-    private int Lifetime = 150;
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +16,8 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Lifetime--;
-        if (Lifetime <= 0)
+        Vector3 position = Camera.main.WorldToViewportPoint(transform.position);
+        if (position.x < 0 || position.x > 1 || position.y < 0 || position.y > 1 || position.z < 0)
             Destroy(gameObject);
     }
 
