@@ -22,6 +22,21 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
+        public Scoreboard_Script _scoreboard;
+
+        #region score
+        internal void UpdateScore(int v)
+        {
+            _scoreboard.UpdateScore(v);
+        }
+
+        internal void ResetScore()
+        {
+            _scoreboard.ResetScore();
+        }
+
+        #endregion
+
         /// <summary>
         /// Max horizontal speed of the player.
         /// </summary>
