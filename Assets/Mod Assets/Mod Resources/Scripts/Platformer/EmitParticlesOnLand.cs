@@ -31,7 +31,6 @@ public class EmitParticlesOnLand : MonoBehaviour
                 p.Play();
             }
         }
-
     }
 
 #endif

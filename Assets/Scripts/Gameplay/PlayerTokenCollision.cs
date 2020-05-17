@@ -1,3 +1,4 @@
+using Assets.Scripts.Gameplay;
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
@@ -19,6 +20,7 @@ namespace Platformer.Gameplay
         public override void Execute()
         {
             AudioSource.PlayClipAtPoint(token.tokenCollectAudio, token.transform.position);
+            player.UpdateScore(ScoreHelper.TOKEN_POINTS);
         }
     }
 }
