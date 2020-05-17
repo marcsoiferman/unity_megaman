@@ -254,7 +254,7 @@ namespace Platformer.Mechanics
             velocity.x += currentDashVelocity;
 
             if (move.x != 0)
-                UpdateFacingRight(move.x > 0.01f);
+                UpdateFacingRight(move.x > 0f);
 
             animator.SetBool("grounded", IsGrounded);
             animator.SetBool("dashing", dashState != DashState.NotDashing);
@@ -276,6 +276,7 @@ namespace Platformer.Mechanics
 
         private void Flip()
         {
+            UnityEngine.Debug.Log($"Flip! {move.x}");
             transform.Rotate(0f, 180f, 0f);
         }
 
