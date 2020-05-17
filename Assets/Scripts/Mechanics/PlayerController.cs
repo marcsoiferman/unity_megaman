@@ -57,6 +57,7 @@ namespace Platformer.Mechanics
         public float dashFloor = 0.7f;
 
         private float currentDashVelocity = 0;
+        private float tempDashVelocity = 0;
         public int currentDashDuration = 0;
 
         public JumpState jumpState = JumpState.Grounded;
@@ -101,6 +102,8 @@ namespace Platformer.Mechanics
 
                 if (Input.GetButtonDown("Dash") && this.IsGrounded && dashState == DashState.NotDashing)
                 {
+                    UnityEngine.Debug.Log("Dash Duration: " + dashDuration);
+                    UnityEngine.Debug.Log("Dash Boost: " + dashBoost);
                     dashState = DashState.PrepareToDash;
                 }
                 else if (Input.GetButtonUp("Dash"))
@@ -113,7 +116,6 @@ namespace Platformer.Mechanics
                 move.x = 0;
             }
             UpdateJumpState();
-            UpdateDashState();
             base.Update();
         }
 
@@ -167,13 +169,11 @@ namespace Platformer.Mechanics
                     stopDash = false;
                     break;
                 case DashState.Dashing:
-                    //Schedule<PlayerJumped>().player = this;
                     dashState = DashState.InDash;
                     break;
                 case DashState.InDash:
                     if (currentDashVelocity == 0)
                     {
-                        //Schedule<PlayerLanded>().player = this;
                         dashState = DashState.DoneDashing;
                     }
                     break;
@@ -181,6 +181,44 @@ namespace Platformer.Mechanics
                     dashState = DashState.NotDashing;
                     break;
             }
+        }
+
+        protected override void FixedUpdate()
+        {
+            if (dash)
+            {
+                currentDashVelocity = dashBoost;
+                currentDashDuration = dashDuration;
+                dash = false;
+            }
+            else if (stopDash)
+            {
+                currentDashVelocity = 0;
+            }
+
+            tempDashVelocity = currentDashVelocity;
+
+            if (currentDashDuration != 0)
+            {
+                if (IsGrounded)
+                {
+                    UnityEngine.Debug.Log($"Dash Duration {currentDashDuration}, Timestamp: {System.DateTime.Now.Ticks}");
+                    if (currentDashDuration < 0.5 * dashDuration)
+                        currentDashVelocity *= dashDecay;
+                    currentDashDuration--;
+                    if (currentDashDuration <= 0)
+                        currentDashVelocity = 0;
+                }
+                else
+                {
+                    tempDashVelocity = Mathf.Abs(move.x * dashAirBoost);
+                }
+                if (spriteRenderer.flipX)
+                    tempDashVelocity = -tempDashVelocity;
+            }
+
+            UpdateDashState();
+            base.FixedUpdate();
         }
 
         protected override void ComputeVelocity()
@@ -199,43 +237,12 @@ namespace Platformer.Mechanics
                 }
             }
 
-            if (dash)
-            {
-                currentDashVelocity = dashBoost;
-                currentDashDuration = dashDuration;
-                dash = false;
-            }
-            else if (stopDash)
-            {
-                currentDashVelocity = 0;
-            }
-
-            float tempDashVelocity = currentDashVelocity;
+            velocity.x += currentDashVelocity;
 
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
             else if (move.x < -0.01f)
                 spriteRenderer.flipX = true;
-
-            if (currentDashDuration != 0)
-            {
-                if (IsGrounded)
-                {
-                    if (currentDashDuration < 0.5 * dashDuration)
-                        currentDashVelocity *= dashDecay;
-                    currentDashDuration--;
-                    if (currentDashDuration <= 0)
-                        currentDashVelocity = 0;
-                }
-                else
-                {
-                    tempDashVelocity = Mathf.Abs(move.x * dashAirBoost);
-                }
-                if (spriteRenderer.flipX)
-                    tempDashVelocity = -tempDashVelocity;
-            }
-
-            velocity.x += currentDashVelocity;
 
             animator.SetBool("grounded", IsGrounded);
             animator.SetBool("dashing", dashState != DashState.NotDashing);
