@@ -22,6 +22,12 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
+        public Color DefaultColor;
+        public Color Stage1ChargingColor;
+        public Color Stage2ChargingColor;
+        public int ChargeFrames = 10;
+        private int currentChargeFrame = 0;
+
         public Scoreboard_Script _scoreboard;
 
         #region score
@@ -82,6 +88,7 @@ namespace Platformer.Mechanics
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;
         public Health health;
+        Weapon weapon;
         public bool controlEnabled = true;
 
         public bool facingRight = true;
@@ -102,6 +109,7 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            weapon = GetComponent<Weapon>();
         }
 
         protected override void Update()
@@ -242,7 +250,34 @@ namespace Platformer.Mechanics
             }
 
             UpdateDashState();
+            UpdateChargingState();
             base.FixedUpdate();
+        }
+
+        protected void UpdateChargingState()
+        {
+            currentChargeFrame = (currentChargeFrame + 1) % ChargeFrames;
+            if (currentChargeFrame == 0)
+            {
+                switch (weapon.ChargeState)
+                {
+                    case Weapon.ChargingState.Tier0:
+                        spriteRenderer.color = DefaultColor;
+                        break;
+                    case Weapon.ChargingState.Tier1:
+                        if (spriteRenderer.color != Stage1ChargingColor)
+                            spriteRenderer.color = Stage1ChargingColor;
+                        else
+                            spriteRenderer.color = DefaultColor;
+                        break;
+                    case Weapon.ChargingState.Tier2:
+                        if (spriteRenderer.color != Stage2ChargingColor)
+                            spriteRenderer.color = Stage2ChargingColor;
+                        else
+                            spriteRenderer.color = Stage1ChargingColor;
+                        break;
+                }
+            }
         }
 
         protected override void ComputeVelocity()

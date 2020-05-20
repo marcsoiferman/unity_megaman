@@ -7,11 +7,17 @@ public class Bullet : MonoBehaviour
 {
     public float Speed = 20f;
     public Rigidbody2D rigidBody;
+    private float power = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody.velocity = transform.right * Speed;
+    }
+
+    public void SetPower(float power)
+    {
+        this.power = power;
     }
 
     private void FixedUpdate()
@@ -26,7 +32,7 @@ public class Bullet : MonoBehaviour
         EnemyController enemy = collision.GetComponent<EnemyController>();
         if (enemy != null)
         {
-            enemy.Damage(1);
+            enemy.Damage((int)power);
             Destroy(gameObject);
         }
         Level level = collision.GetComponent<Level>();
