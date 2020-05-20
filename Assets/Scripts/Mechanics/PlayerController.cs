@@ -87,6 +87,7 @@ namespace Platformer.Mechanics
         private bool stopJump;
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;
+        /*internal new*/ public Collider2D wallCollider2d;
         public Health health;
         Weapon weapon;
         public bool controlEnabled = true;
@@ -99,6 +100,7 @@ namespace Platformer.Mechanics
         SpriteRenderer spriteRenderer;
         internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        private bool againstWall = false;
 
         public Bounds Bounds => collider2d.bounds;
 
@@ -107,6 +109,7 @@ namespace Platformer.Mechanics
             health = GetComponent<Health>();
             audioSource = GetComponent<AudioSource>();
             collider2d = GetComponent<Collider2D>();
+            wallCollider2d = GetComponents<Collider2D>()[1];
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
             weapon = GetComponent<Weapon>();
@@ -306,6 +309,12 @@ namespace Platformer.Mechanics
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
+            if (collidedWall != null)
+            {
+                if (!wallCollider2d.IsTouching(collidedWall))
+                    collidedWall = null;
+                finalMove.x = 0;
+            }
             targetVelocity = finalMove * maxSpeed;
         }
 
@@ -322,7 +331,30 @@ namespace Platformer.Mechanics
         private void Flip()
         {
             UnityEngine.Debug.Log($"Flip! {move.x}");
+            collidedWall = null;
             transform.Rotate(0f, 180f, 0f);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Level level = collision.GetComponent<Level>();
+            if (level != null)
+            {
+                UnityEngine.Debug.Log("Hit a wall???");
+                collidedWall = collision;
+            }
+        }
+
+        private Collider2D collidedWall = null;
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            Level level = collision.GetComponent<Level>();
+            if (level != null)
+            {
+                UnityEngine.Debug.Log("Exited a wall???");
+                againstWall = false;
+            }
         }
 
         public enum JumpState
