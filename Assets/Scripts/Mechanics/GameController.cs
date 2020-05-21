@@ -20,17 +20,21 @@ namespace Platformer.Mechanics
         //shared reference when the scene loads, allowing the model to be
         //conveniently configured inside the inspector.
         public PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        public EnemyManager enemyManager; 
 
         void OnEnable()
         {
             Instance = this;
             model.player.OnRespawn += RespawnWorld;
+            enemyManager = GetComponent<EnemyManager>();
         }
 
         private void RespawnWorld()
         {
-            TokenController controller = GetComponent<TokenController>();
-            controller.Respawn();
+            TokenController tokenController = GetComponent<TokenController>();
+            tokenController.Respawn();
+     
+            enemyManager.Respawn();
         }
 
         void OnDisable()
