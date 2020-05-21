@@ -92,15 +92,13 @@ namespace Platformer.Mechanics
         Weapon weapon;
         public bool controlEnabled = true;
 
-        public bool facingRight = true;
-
         public bool dash;
         bool jump;
         Vector2 move;
         SpriteRenderer spriteRenderer;
         internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        private bool againstWall = false;
+        private bool againstWall => collidedWall != null;
 
         public Bounds Bounds => collider2d.bounds;
 
@@ -120,7 +118,7 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                if ((jumpState == JumpState.Grounded || againstWall) && Input.GetButtonDown("Jump"))
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
                 {
@@ -248,9 +246,9 @@ namespace Platformer.Mechanics
                 {
                     tempDashVelocity = Mathf.Abs(move.x * dashAirBoost);
                 }
-                if (!facingRight)
-                    tempDashVelocity = -tempDashVelocity;
             }
+            if (!facingRight)
+                tempDashVelocity = -tempDashVelocity;
 
             UpdateDashState();
             UpdateChargingState();
@@ -285,8 +283,11 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
-            if (jump && IsGrounded)
+            if (jump)//&& IsGrounded)
             {
+                wallJumping = againstWall && !IsGrounded;
+                if (wallJumping)
+                    wallBoostDuration = wallJumpDuration;
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
                 jump = false;
             }
@@ -309,12 +310,11 @@ namespace Platformer.Mechanics
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
-            if (collidedWall != null)
-            {
-                if (!wallCollider2d.IsTouching(collidedWall))
-                    collidedWall = null;
+            if (againstWall && wallCollider2d.IsTouching(collidedWall))
                 finalMove.x = 0;
-            }
+            else
+                collidedWall = null;
+
             targetVelocity = finalMove * maxSpeed;
         }
 
@@ -324,13 +324,12 @@ namespace Platformer.Mechanics
                 return;
 
             Flip();
-            facingRight = newValue;
             //spriteRenderer.flipX = !facingRight;
         }
 
         private void Flip()
         {
-            UnityEngine.Debug.Log($"Flip! {move.x}");
+            facingRight = !facingRight;
             collidedWall = null;
             transform.Rotate(0f, 180f, 0f);
         }
@@ -340,8 +339,8 @@ namespace Platformer.Mechanics
             Level level = collision.GetComponent<Level>();
             if (level != null)
             {
-                UnityEngine.Debug.Log("Hit a wall???");
                 collidedWall = collision;
+                wallJumping = false;
             }
         }
 
@@ -352,8 +351,7 @@ namespace Platformer.Mechanics
             Level level = collision.GetComponent<Level>();
             if (level != null)
             {
-                UnityEngine.Debug.Log("Exited a wall???");
-                againstWall = false;
+                collidedWall = null;
             }
         }
 

@@ -30,6 +30,20 @@ namespace Platformer.Mechanics
         /// <value></value>
         public bool IsGrounded { get; private set; }
 
+        /// <summary>
+        /// Speed to boost off via wall jump.
+        /// </summary>
+        public float wallJumpBoost = 2f;
+
+        /// <summary>
+        /// Wall jump frames.
+        /// </summary>
+        public int wallJumpDuration = 10;
+
+        protected bool wallJumping = false;
+        protected int wallBoostDuration = 5;
+
+        protected bool facingRight = true;
         protected Vector2 targetVelocity;
         protected Vector2 groundNormal;
         protected Rigidbody2D body;
@@ -108,6 +122,15 @@ namespace Platformer.Mechanics
                 velocity += Physics2D.gravity * Time.deltaTime;
 
             velocity.x = targetVelocity.x;
+
+            if (wallBoostDuration > 0)
+            {
+                if (facingRight)
+                    velocity.x = -wallJumpBoost;
+                else
+                    velocity.x = wallJumpBoost;
+                wallBoostDuration--;
+            }
 
             IsGrounded = false;
 
