@@ -25,33 +25,20 @@ namespace Platformer.Gameplay
 
             if (willHurtEnemy)
             {
-                var enemyHealth = enemy.GetComponent<Health>();
-                if (enemyHealth != null)
+                enemy.Damage(3);
+                if (!enemy.IsAlive)
                 {
-                    enemyHealth.Decrement();
-                    if (!enemyHealth.IsAlive)
-                    {
-                        player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
-                        Schedule<EnemyDeath>().enemy = enemy;
-                        player.Bounce(2);
-                    }
-                    else
-                    {
-                        player.Bounce(7);
-                    }
+                    player.Bounce(2);
                 }
                 else
                 {
-                    player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
-                    Schedule<EnemyDeath>().enemy = enemy;
-                    player.Bounce(2);
+                    player.Bounce(7);
                 }
             }
             else
             {
-                var playerHealth = player.GetComponent<Health>();
-                player.Damage();
-                playerHealth.Decrement();
+                player.PlayDamageAnimation();
+                player.Damage(1);
             }
         }
     }
