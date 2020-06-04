@@ -16,8 +16,6 @@ namespace Platformer.Mechanics
     {
         public PatrolPath path;
         public AudioClip ouch;
-        public bool IsAlive { get; set; }
-
         public bool IsAlive => health.IsAlive;
 
         public Vector3 StartingPosition { get; set; }
@@ -45,7 +43,6 @@ namespace Platformer.Mechanics
             StartingPosition = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z); 
             startingVelocity = new Vector2(this.control.velocity.x,0);
 
-            IsAlive = true;
             health = GetComponent<Health>();
 
         }
@@ -66,7 +63,7 @@ namespace Platformer.Mechanics
             this._collider.enabled = true;
             this.control.Teleport(StartingPosition);
             this.control.enabled = true;
-            IsAlive = true;
+            health.Respawn(); 
         }
 
 
