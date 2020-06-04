@@ -15,10 +15,12 @@ namespace Platformer.Mechanics
     {
         public PatrolPath path;
         public AudioClip ouch;
-        public bool IsAlive;
+        public bool IsAlive { get; set; }
 
-        private Vector3 startingPosition;
+        public Vector3 StartingPosition { get; set; }
         private Vector2 startingVelocity;
+        private Bounds startingBounds;
+
         internal PatrolPath.Mover mover;
         internal AnimationController control;
         internal Collider2D _collider;
@@ -36,8 +38,9 @@ namespace Platformer.Mechanics
             _collider = GetComponent<Collider2D>();
             _audio = GetComponent<AudioSource>();
             spriteRenderer = GetComponent<SpriteRenderer>();
-            startingPosition = this.transform.position;
-            startingVelocity = this.control.velocity;
+            StartingPosition = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z); 
+            startingVelocity = new Vector2(this.control.velocity.x,0);
+
             IsAlive = true;
         }
 
@@ -53,15 +56,12 @@ namespace Platformer.Mechanics
         }
         public void Respawn()
         {
-            if (!IsAlive)
-            {
-                this._collider.enabled = true;
-                this._collider.attachedRigidbody.bodyType = RigidbodyType2D.Kinematic;
-                this.control.enabled = true;
-                this.transform.position = startingPosition;
-                this.control.velocity = startingVelocity;
-                IsAlive = true;
-            }
+            this._collider.enabled = true;
+            this.transform.position = StartingPosition;
+            this.control.velocity = startingVelocity;
+            this.control.ResetGrounding();
+            this.control.enabled = true;
+            IsAlive = true;
         }
 
 
@@ -73,6 +73,5 @@ namespace Platformer.Mechanics
                 control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
             }
         }
-
     }
 }

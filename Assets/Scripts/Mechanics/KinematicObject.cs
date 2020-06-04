@@ -39,6 +39,11 @@ namespace Platformer.Mechanics
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
 
+        public void ResetGrounding()
+        {
+            groundNormal = new Vector2(0, 0);
+            IsGrounded = false;
+        }
 
         /// <summary>
         /// Bounce the object's vertical velocity.
