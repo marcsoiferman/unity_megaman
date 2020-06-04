@@ -38,6 +38,17 @@ namespace Platformer.Mechanics
             sprites = idleAnimation;
         }
 
+        public void Respawn()
+        {
+            if (collected)
+            {
+                this.gameObject.SetActive(true);
+                collected = false;
+                frame = Random.Range(0, sprites.Length);
+                sprites = idleAnimation;
+            }
+        }
+
         void OnTriggerEnter2D(Collider2D other)
         {
             //only exectue OnPlayerEnter if the player collides with this token.
