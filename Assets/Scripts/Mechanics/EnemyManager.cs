@@ -11,6 +11,8 @@ public class EnemyManager : MonoBehaviour
     public IEnemy[] enemies;
 
     float nextFrameTime = 0;
+    private const double RESPAWN_BUFFER = 0.1;
+
 
     [ContextMenu("Find All Enemies")]
     void FindAllEnemies()
@@ -46,8 +48,10 @@ public class EnemyManager : MonoBehaviour
         {
             Vector3 position = Camera.main.WorldToViewportPoint(enemy.transform.position);
             Vector3 startingPosition = Camera.main.WorldToViewportPoint(enemy.StartingPosition);
+            double min = 0 - RESPAWN_BUFFER;
+            double max = 1 + RESPAWN_BUFFER;
 
-            if (position.x < 0 || position.x > 1 || startingPosition.y < 0 || startingPosition.y > 1)
+            if (position.x < min || position.x > max || startingPosition.y < min || startingPosition.y  > max)
                 enemy.Respawn();
         }
     }

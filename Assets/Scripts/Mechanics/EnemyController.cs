@@ -56,10 +56,9 @@ namespace Platformer.Mechanics
         }
         public void Respawn()
         {
+
             this._collider.enabled = true;
-            this.transform.position = StartingPosition;
-            this.control.velocity = startingVelocity;
-            this.control.ResetGrounding();
+            this.control.Teleport(StartingPosition);
             this.control.enabled = true;
             IsAlive = true;
         }
