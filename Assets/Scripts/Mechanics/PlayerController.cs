@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Platformer.Mechanics
 {
@@ -93,11 +94,10 @@ namespace Platformer.Mechanics
         private bool stopJump;
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;
+        /*internal new*/ public Collider2D wallCollider2d;
         public Health health;
         Weapon weapon;
         public bool controlEnabled = true;
-
-        public bool facingRight = true;
 
         public bool dash;
         bool jump;
@@ -105,6 +105,7 @@ namespace Platformer.Mechanics
         SpriteRenderer spriteRenderer;
         internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        private bool againstWall => collidedWall != null;
 
         public Bounds Bounds => collider2d.bounds;
 
@@ -115,6 +116,7 @@ namespace Platformer.Mechanics
             health = GetComponent<Health>();
             audioSource = GetComponent<AudioSource>();
             collider2d = GetComponent<Collider2D>();
+            wallCollider2d = GetComponents<Collider2D>()[1];
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
             weapon = GetComponent<Weapon>();
@@ -125,7 +127,7 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                if ((jumpState == JumpState.Grounded || againstWall) && Input.GetButtonDown("Jump"))
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
                 {
@@ -253,9 +255,9 @@ namespace Platformer.Mechanics
                 {
                     tempDashVelocity = Mathf.Abs(move.x * dashAirBoost);
                 }
-                if (!facingRight)
-                    tempDashVelocity = -tempDashVelocity;
             }
+            if (!facingRight)
+                tempDashVelocity = -tempDashVelocity;
 
             UpdateDashState();
             UpdateChargingState();
@@ -290,8 +292,11 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
-            if (jump && IsGrounded)
+            if (jump)//&& IsGrounded)
             {
+                wallJumping = againstWall && !IsGrounded;
+                if (wallJumping)
+                    wallBoostDuration = wallJumpDuration;
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
                 jump = false;
             }
@@ -314,6 +319,11 @@ namespace Platformer.Mechanics
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
+            if (againstWall && wallCollider2d.IsTouching(collidedWall))
+                finalMove.x = 0;
+            else
+                collidedWall = null;
+
             targetVelocity = finalMove * maxSpeed;
         }
 
@@ -323,14 +333,53 @@ namespace Platformer.Mechanics
                 return;
 
             Flip();
-            facingRight = newValue;
-            //spriteRenderer.flipX = !facingRight;
         }
 
         private void Flip()
         {
-            UnityEngine.Debug.Log($"Flip! {move.x}");
+            facingRight = !facingRight;
+            collidedWall = null;
             transform.Rotate(0f, 180f, 0f);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Level level = collision.GetComponent<Level>();
+            if (level != null)
+            {
+                collidedWall = collision;
+                wallJumping = false;
+                //List<ContactPoint2D> points = new List<ContactPoint2D>();
+                //Collider2D[] colliders = { wallCollider2d };
+                //int count = collision.GetContacts(points);
+                //if (count > 0)
+                //{
+                //    ContactPoint2D point = points.FirstOrDefault(a => a.collider.GetComponent<PlayerController>() != null);
+                //    if (point.collider != null && point.collider.GetComponent<PlayerController>() != null)
+                //    {
+                //        Vector2 diff = point.point - new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y);
+                //        UnityEngine.Debug.Log($"{point.point.x} {this.transform.position.x}");
+                //        if (diff.x < 0)
+                //            UnityEngine.Debug.Log($"Right!");
+                //        else
+                //            UnityEngine.Debug.Log($"Left!");
+
+                //        collidedWall = collision;
+                //        wallJumping = false;
+                //    }
+                //}
+            }
+        }
+
+        private Collider2D collidedWall = null;
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            Level level = collision.GetComponent<Level>();
+            if (level != null)
+            {
+                collidedWall = null;
+            }
         }
 
         public enum JumpState
