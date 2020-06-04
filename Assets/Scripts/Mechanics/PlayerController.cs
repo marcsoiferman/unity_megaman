@@ -22,6 +22,12 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
+        public Color DefaultColor;
+        public Color Stage1ChargingColor;
+        public Color Stage2ChargingColor;
+        public int ChargeFrames = 10;
+        private int currentChargeFrame = 0;
+
         public Scoreboard_Script _scoreboard;
 
         #region score
@@ -88,7 +94,10 @@ namespace Platformer.Mechanics
         /*internal new*/ public Collider2D collider2d;
         /*internal new*/ public AudioSource audioSource;
         public Health health;
+        Weapon weapon;
         public bool controlEnabled = true;
+
+        public bool facingRight = true;
 
         public bool dash;
         bool jump;
@@ -108,6 +117,7 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            weapon = GetComponent<Weapon>();
         }
 
         protected override void Update()
@@ -125,8 +135,6 @@ namespace Platformer.Mechanics
 
                 if (Input.GetButtonDown("Dash") && this.IsGrounded && dashState == DashState.NotDashing)
                 {
-                    UnityEngine.Debug.Log("Dash Duration: " + dashDuration);
-                    UnityEngine.Debug.Log("Dash Boost: " + dashBoost);
                     dashState = DashState.PrepareToDash;
                 }
                 else if (Input.GetButtonUp("Dash"))
@@ -175,10 +183,20 @@ namespace Platformer.Mechanics
             }
         }
 
-        public void Damage()
+        public void PlayDamageAnimation()
         {
             animator.SetTrigger("hurt");
             audioSource.PlayOneShot(ouchAudio);
+        }
+
+        public void Damage(int amount = 1)
+        {
+            health.Decrement(amount);
+            if (!health.IsAlive)
+            {
+                var ev = Schedule<HealthIsZero>();
+                ev.health = health;
+            }
         }
 
         void UpdateDashState()
@@ -225,7 +243,6 @@ namespace Platformer.Mechanics
             {
                 if (IsGrounded)
                 {
-                    UnityEngine.Debug.Log($"Dash Duration {currentDashDuration}, Timestamp: {System.DateTime.Now.Ticks}");
                     if (currentDashDuration < 0.5 * dashDuration)
                         currentDashVelocity *= dashDecay;
                     currentDashDuration--;
@@ -236,12 +253,39 @@ namespace Platformer.Mechanics
                 {
                     tempDashVelocity = Mathf.Abs(move.x * dashAirBoost);
                 }
-                if (spriteRenderer.flipX)
+                if (!facingRight)
                     tempDashVelocity = -tempDashVelocity;
             }
 
             UpdateDashState();
+            UpdateChargingState();
             base.FixedUpdate();
+        }
+
+        protected void UpdateChargingState()
+        {
+            currentChargeFrame = (currentChargeFrame + 1) % ChargeFrames;
+            if (currentChargeFrame == 0)
+            {
+                switch (weapon.ChargeState)
+                {
+                    case Weapon.ChargingState.Tier0:
+                        spriteRenderer.color = DefaultColor;
+                        break;
+                    case Weapon.ChargingState.Tier1:
+                        if (spriteRenderer.color != Stage1ChargingColor)
+                            spriteRenderer.color = Stage1ChargingColor;
+                        else
+                            spriteRenderer.color = DefaultColor;
+                        break;
+                    case Weapon.ChargingState.Tier2:
+                        if (spriteRenderer.color != Stage2ChargingColor)
+                            spriteRenderer.color = Stage2ChargingColor;
+                        else
+                            spriteRenderer.color = Stage1ChargingColor;
+                        break;
+                }
+            }
         }
 
         protected override void ComputeVelocity()
@@ -262,10 +306,8 @@ namespace Platformer.Mechanics
 
             velocity.x += currentDashVelocity;
 
-            if (move.x > 0.01f)
-                spriteRenderer.flipX = false;
-            else if (move.x < -0.01f)
-                spriteRenderer.flipX = true;
+            if (move.x != 0)
+                UpdateFacingRight(move.x > 0f);
 
             animator.SetBool("grounded", IsGrounded);
             animator.SetBool("dashing", dashState != DashState.NotDashing);
@@ -273,6 +315,22 @@ namespace Platformer.Mechanics
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
             targetVelocity = finalMove * maxSpeed;
+        }
+
+        private void UpdateFacingRight(bool newValue)
+        {
+            if (facingRight == newValue)
+                return;
+
+            Flip();
+            facingRight = newValue;
+            //spriteRenderer.flipX = !facingRight;
+        }
+
+        private void Flip()
+        {
+            UnityEngine.Debug.Log($"Flip! {move.x}");
+            transform.Rotate(0f, 180f, 0f);
         }
 
         public enum JumpState

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
+using Assets.Scripts.Gameplay;
 using Platformer.Gameplay;
 using UnityEngine;
 using static Platformer.Core.Simulation;
@@ -17,6 +18,8 @@ namespace Platformer.Mechanics
         public AudioClip ouch;
         public bool IsAlive { get; set; }
 
+        public bool IsAlive => health.IsAlive;
+
         public Vector3 StartingPosition { get; set; }
         private Vector2 startingVelocity;
         private Bounds startingBounds;
@@ -25,6 +28,7 @@ namespace Platformer.Mechanics
         internal AnimationController control;
         internal Collider2D _collider;
         internal AudioSource _audio;
+        internal Health health;
         SpriteRenderer spriteRenderer;
 
         public Bounds Bounds => _collider.bounds;
@@ -42,6 +46,8 @@ namespace Platformer.Mechanics
             startingVelocity = new Vector2(this.control.velocity.x,0);
 
             IsAlive = true;
+            health = GetComponent<Health>();
+
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -70,6 +76,16 @@ namespace Platformer.Mechanics
             {
                 if (mover == null) mover = path.CreateMover(control.maxSpeed * 0.5f);
                 control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
+            }
+        }
+        public void Damage(int amount = 1)
+        {
+            health.Decrement(amount);
+            if (!health.IsAlive)
+            {
+                PlayerController player = UnityEngine.Object.FindObjectOfType<PlayerController>();
+                player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
+                Schedule<EnemyDeath>().enemy = this;
             }
         }
     }
