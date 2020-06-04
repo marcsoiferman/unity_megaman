@@ -11,7 +11,7 @@ namespace Assets.Scripts
     public interface IEnemy
     {
         int EnemyIndex { get; set; }
-        bool IsAlive { get; set; }
+        bool IsAlive { get;}
         Vector3 StartingPosition { get; set; }
         EnemyManager Manager {get; set; }
         Transform transform { get; }
