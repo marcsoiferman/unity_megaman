@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Platformer.Mechanics
 {
@@ -324,7 +325,6 @@ namespace Platformer.Mechanics
                 return;
 
             Flip();
-            //spriteRenderer.flipX = !facingRight;
         }
 
         private void Flip()
@@ -339,8 +339,25 @@ namespace Platformer.Mechanics
             Level level = collision.GetComponent<Level>();
             if (level != null)
             {
-                collidedWall = collision;
-                wallJumping = false;
+                List<ContactPoint2D> points = new List<ContactPoint2D>();
+                Collider2D[] colliders = { wallCollider2d };
+                int count = collision.GetContacts(points);
+                if (count > 0)
+                {
+                    ContactPoint2D point = points.FirstOrDefault(a => a.collider.GetComponent<PlayerController>() != null);
+                    if (point.collider != null && point.collider.GetComponent<PlayerController>() != null)
+                    {
+                        Vector2 diff = point.point - new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y);
+                        UnityEngine.Debug.Log($"{point.point.x} {this.transform.position.x}");
+                        if (diff.x < 0)
+                            UnityEngine.Debug.Log($"Right!");
+                        else
+                            UnityEngine.Debug.Log($"Left!");
+
+                        collidedWall = collision;
+                        wallJumping = false;
+                    }
+                }
             }
         }
 
