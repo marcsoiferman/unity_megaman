@@ -42,13 +42,13 @@ public class Bullet : MonoBehaviour
         if (AnimatingSprites != null && AnimatingSprites.Length > 0)
         {
             deltaTime += Time.deltaTime;
-            while (deltaTime >= FrameSeconds || _mCurrentFrame == 0)
+            while (deltaTime >= FrameSeconds)
             {
                 deltaTime = Math.Max(0, deltaTime - FrameSeconds);
-                _mRenderer.sprite = AnimatingSprites[_mCurrentFrame];
                 _mCurrentFrame++;
                 if (_mCurrentFrame >= AnimatingSprites.Length)
                     _mCurrentFrame = Math.Max(0, LoopFrame);
+                _mRenderer.sprite = AnimatingSprites[_mCurrentFrame];
             }
         }
     }
