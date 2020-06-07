@@ -89,12 +89,6 @@ public class Weapon : MonoBehaviour
         Bullet bullet = obj.GetComponent<Bullet>();
         if (bullet != null)
         {
-            if (bullet.MuzzleFlash != null)
-            {
-                GameObject flash = Instantiate(bullet.MuzzleFlash, firePoint.position, firePoint.rotation);
-                flash.transform.parent = firePoint;
-            }
-
             bullet.SetPower(power);
         }
         deltaTime = power <= 1 ? 0 : FireCooldownSeconds;

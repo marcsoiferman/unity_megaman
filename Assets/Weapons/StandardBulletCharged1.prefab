@@ -81,12 +81,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1380148004999957638, guid: c03878e11fdd0f043819e94740411104,
+      objectReference: {fileID: -6108468808617680215, guid: c03878e11fdd0f043819e94740411104,
         type: 3}
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: AnimatingSprites.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
@@ -97,31 +97,31 @@ PrefabInstance:
         type: 3}
       propertyPath: AnimatingSprites.Array.data[0]
       value: 
-      objectReference: {fileID: -1380148004999957638, guid: c03878e11fdd0f043819e94740411104,
+      objectReference: {fileID: -6108468808617680215, guid: c03878e11fdd0f043819e94740411104,
         type: 3}
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: AnimatingSprites.Array.data[1]
       value: 
-      objectReference: {fileID: -4606384160018768459, guid: c03878e11fdd0f043819e94740411104,
+      objectReference: {fileID: 5619487256798038841, guid: c03878e11fdd0f043819e94740411104,
         type: 3}
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: AnimatingSprites.Array.data[2]
       value: 
-      objectReference: {fileID: 6653091457700542288, guid: c03878e11fdd0f043819e94740411104,
+      objectReference: {fileID: -1380148004999957638, guid: c03878e11fdd0f043819e94740411104,
         type: 3}
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: AnimatingSprites.Array.data[3]
       value: 
-      objectReference: {fileID: 7401559982705190782, guid: c03878e11fdd0f043819e94740411104,
+      objectReference: {fileID: -4606384160018768459, guid: c03878e11fdd0f043819e94740411104,
         type: 3}
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: AnimatingSprites.Array.data[4]
       value: 
-      objectReference: {fileID: 7017752382199225629, guid: c03878e11fdd0f043819e94740411104,
+      objectReference: {fileID: 6653091457700542288, guid: c03878e11fdd0f043819e94740411104,
         type: 3}
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
@@ -145,6 +145,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7605378105823864078, guid: d70af158f5856cb4099f5217a81db823,
         type: 3}
+    - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[5]
+      value: 
+      objectReference: {fileID: 7401559982705190782, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[6]
+      value: 
+      objectReference: {fileID: 7017752382199225629, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: FrameMoveStart
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9130618751145163444, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: m_Offset.x

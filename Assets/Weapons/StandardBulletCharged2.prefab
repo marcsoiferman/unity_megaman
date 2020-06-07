@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: -3877858031382602788, guid: c03878e11fdd0f043819e94740411104,
+  m_Sprite: {fileID: 1616216164800660337, guid: c03878e11fdd0f043819e94740411104,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,15 +120,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 8
   rigidBody: {fileID: 2102006754631332725}
+  FrameMoveStart: 2
   AnimatingSprites:
+  - {fileID: 1616216164800660337, guid: c03878e11fdd0f043819e94740411104, type: 3}
+  - {fileID: 6338944551680996025, guid: c03878e11fdd0f043819e94740411104, type: 3}
   - {fileID: -3877858031382602788, guid: c03878e11fdd0f043819e94740411104, type: 3}
   - {fileID: 8606107501824153910, guid: c03878e11fdd0f043819e94740411104, type: 3}
   - {fileID: 5108340471596631324, guid: c03878e11fdd0f043819e94740411104, type: 3}
-  LoopFrame: 0
+  LoopFrame: 2
   FrameSeconds: 0.125
   Explosion: {fileID: 7634595563752263856, guid: 69aaa6bcda1e01b49a95ae2db0a8334f,
-    type: 3}
-  MuzzleFlash: {fileID: 2351844194834807258, guid: ce5311c5b2d3c7c46ac399f6840feb4b,
     type: 3}
 --- !u!70 &6447098943937346581
 CapsuleCollider2D:
