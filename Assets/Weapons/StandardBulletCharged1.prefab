@@ -139,6 +139,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4172197057613204009, guid: 0d22a3608c13c5f4eb44481ea9e39cc4,
         type: 3}
+    - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: MuzzleFlash
+      value: 
+      objectReference: {fileID: 7605378105823864078, guid: d70af158f5856cb4099f5217a81db823,
+        type: 3}
     - target: {fileID: 9130618751145163444, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: m_Offset.x

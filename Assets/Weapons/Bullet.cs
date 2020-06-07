@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
     private SpriteRenderer _mRenderer;
     private float deltaTime;
     public GameObject Explosion;
+    public GameObject MuzzleFlash;
 
     // Start is called before the first frame update
     void Start()

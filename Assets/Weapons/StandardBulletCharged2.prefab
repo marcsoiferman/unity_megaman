@@ -128,6 +128,8 @@ MonoBehaviour:
   FrameSeconds: 0.125
   Explosion: {fileID: 7634595563752263856, guid: 69aaa6bcda1e01b49a95ae2db0a8334f,
     type: 3}
+  MuzzleFlash: {fileID: 2351844194834807258, guid: ce5311c5b2d3c7c46ac399f6840feb4b,
+    type: 3}
 --- !u!70 &6447098943937346581
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
