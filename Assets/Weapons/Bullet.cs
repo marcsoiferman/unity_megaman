@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     private int _mCurrentFrame;
     private SpriteRenderer _mRenderer;
     private float deltaTime;
+    public GameObject Explosion;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +60,11 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             enemy.Damage((int)power);
+            if (Explosion != null)
+            {
+                GameObject obj = Instantiate(Explosion, rigidBody.transform.position, rigidBody.transform.rotation);
+                
+            }
             Destroy(gameObject);
         }
         //Level level = collision.GetComponent<Level>();

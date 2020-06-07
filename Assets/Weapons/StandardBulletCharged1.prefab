@@ -133,6 +133,12 @@ PrefabInstance:
       propertyPath: FrameSeconds
       value: 0.125
       objectReference: {fileID: 0}
+    - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: Explosion
+      value: 
+      objectReference: {fileID: 4172197057613204009, guid: 0d22a3608c13c5f4eb44481ea9e39cc4,
+        type: 3}
     - target: {fileID: 9130618751145163444, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: m_Offset.x
@@ -156,7 +162,7 @@ PrefabInstance:
     - target: {fileID: 9130618751145163445, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: m_Name
-      value: StandardBulletCharged1 Variant
+      value: StandardBulletCharged1
       objectReference: {fileID: 0}
     - target: {fileID: 9130618751145163445, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}

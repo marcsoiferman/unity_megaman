@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9130618751145163445
+--- !u!1 &5031131107611280150
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9130618751145163432}
-  - component: {fileID: 9130618751145163433}
-  - component: {fileID: 9130618751145163434}
-  - component: {fileID: 9130618751145163435}
-  - component: {fileID: 9130618751145163444}
+  - component: {fileID: 5031131107611280137}
+  - component: {fileID: 5031131107611280136}
+  - component: {fileID: 5031131107611280151}
   m_Layer: 0
-  m_Name: StandardBullet
+  m_Name: StandardBulletExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9130618751145163432
+--- !u!4 &5031131107611280137
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130618751145163445}
+  m_GameObject: {fileID: 5031131107611280150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.285682, y: 0.032915138, z: -120.63281}
+  m_LocalPosition: {x: 0.5661338, y: 0.6301398, z: -121.17822}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9130618751145163433
+--- !u!212 &5031131107611280136
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130618751145163445}
+  m_GameObject: {fileID: 5031131107611280150}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,71 +71,32 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 1763911723152408263, guid: c03878e11fdd0f043819e94740411104,
+  m_Sprite: {fileID: -5276883874321848007, guid: c03878e11fdd0f043819e94740411104,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.08, y: 0.06}
+  m_Size: {x: 0.12, y: 0.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &9130618751145163434
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130618751145163445}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &9130618751145163435
+--- !u!114 &5031131107611280151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130618751145163445}
+  m_GameObject: {fileID: 5031131107611280150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e7dee094dd37b46964a65f72bd80ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f3489e7ed83353c41bbeb604857fb249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 8
-  rigidBody: {fileID: 9130618751145163434}
-  AnimatingSprites: []
-  LoopFrame: 0
-  FrameSeconds: 0
-  Explosion: {fileID: 5031131107611280150, guid: 04a237b83ba8dfd42a2bfb22c6716543,
-    type: 3}
---- !u!70 &9130618751145163444
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130618751145163445}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0008834825, y: -0.0001261904}
-  m_Size: {x: 0.084795505, y: 0.06510972}
-  m_Direction: 1
+  AnimatingSprites:
+  - {fileID: -5276883874321848007, guid: c03878e11fdd0f043819e94740411104, type: 3}
+  - {fileID: -29561040982941344, guid: c03878e11fdd0f043819e94740411104, type: 3}
+  - {fileID: -3997405699895402171, guid: c03878e11fdd0f043819e94740411104, type: 3}
+  FrameSeconds: 0.05
