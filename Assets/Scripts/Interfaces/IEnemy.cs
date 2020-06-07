@@ -11,10 +11,17 @@ namespace Assets.Scripts
     public interface IEnemy
     {
         int EnemyIndex { get; set; }
-        bool IsAlive { get;}
+        bool IsAlive { get; }
         Vector3 StartingPosition { get; set; }
-        EnemyManager Manager {get; set; }
+        EnemyManager Manager { get; set; }
         Transform transform { get; }
         void Respawn();
+        Bounds Bounds { get; }
+        void Damage(int amount);
+        Collider2D _collider { get; }
+        AnimationController control { get; }
+        Health health { get; }
+        AudioSource _audio { get; }
+        AudioClip ouch { get;}
     }
 }

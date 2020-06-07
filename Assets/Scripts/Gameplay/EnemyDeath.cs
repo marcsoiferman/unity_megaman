@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Platformer.Core;
 using Platformer.Mechanics;
 
@@ -9,7 +10,7 @@ namespace Platformer.Gameplay
     /// <typeparam name="EnemyDeath"></typeparam>
     public class EnemyDeath : Simulation.Event<EnemyDeath>
     {
-        public EnemyController enemy;
+        public IEnemy enemy;
 
         public override void Execute()
         {

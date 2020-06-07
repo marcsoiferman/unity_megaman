@@ -15,7 +15,7 @@ namespace Platformer.Mechanics
     public class EnemyController : MonoBehaviour, IEnemy
     {
         public PatrolPath path;
-        public AudioClip ouch;
+        public AudioClip ouch { get; private set; }
         public bool IsAlive => health.IsAlive;
 
         public Vector3 StartingPosition { get; set; }
@@ -23,10 +23,10 @@ namespace Platformer.Mechanics
         private Bounds startingBounds;
 
         internal PatrolPath.Mover mover;
-        internal AnimationController control;
-        internal Collider2D _collider;
-        internal AudioSource _audio;
-        internal Health health;
+        public AnimationController control { get; private set; }
+        public Collider2D _collider { get; private set; }
+        public  AudioSource _audio { get; private set; }
+        public Health health { get; private set; }
         SpriteRenderer spriteRenderer;
 
         public Bounds Bounds => _collider.bounds;
