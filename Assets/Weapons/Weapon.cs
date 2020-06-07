@@ -20,16 +20,15 @@ public class Weapon : MonoBehaviour
     public int MaxBullets;
     private float deltaTime;
 
+    private void Start()
+    {
+        deltaTime = FireCooldownSeconds; //let you shoot immediately
+    }
+
     // Update is called once per frame
     void Update()
     {
         deltaTime += Time.deltaTime;
-        UnityEngine.Debug.Log(deltaTime);
-        if (deltaTime > FireCooldownSeconds)
-            deltaTime = 0;
-        else
-            return;
-
         if (Input.GetButtonDown("Fire1"))
         {
             ChargeState = ChargingState.Tier0;
@@ -77,10 +76,8 @@ public class Weapon : MonoBehaviour
 
     private void Shoot(float power)
     {
-        if (power == 1)
-        {
-
-        }
+        if (deltaTime < FireCooldownSeconds)
+            return;
 
         GameObject prefab = bulletPrefabNormal;
         if (power == 2)
@@ -92,9 +89,9 @@ public class Weapon : MonoBehaviour
         Bullet bullet = obj.GetComponent<Bullet>();
         if (bullet != null)
         {
-            //obj.transform.localScale *= power;
             bullet.SetPower(power);
         }
+        deltaTime = power <= 1 ? 0 : FireCooldownSeconds;
     }
 
     public enum ChargingState
