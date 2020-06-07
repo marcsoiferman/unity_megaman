@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rigidBody.velocity = transform.right * Speed;
-        renderer = GetComponent<SpriteRenderer>();
+        _mRenderer = GetComponent<SpriteRenderer>();
         _mCurrentFrame = 0;
         deltaTime = 0;
     }
