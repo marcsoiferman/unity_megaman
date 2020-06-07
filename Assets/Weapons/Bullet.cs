@@ -1,4 +1,5 @@
 ﻿using Platformer.Mechanics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,20 @@ public class Bullet : MonoBehaviour
     public float Speed = 20f;
     public Rigidbody2D rigidBody;
     private float power = 1;
+    public Sprite[] AnimatingSprites;
+    public int LoopFrame;
+    public float FrameSeconds;
+    private int _mCurrentFrame;
+    private SpriteRenderer _mRenderer;
+    private float deltaTime;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody.velocity = transform.right * Speed;
+        renderer = GetComponent<SpriteRenderer>();
+        _mCurrentFrame = 0;
+        deltaTime = 0;
     }
 
     public void SetPower(float power)
@@ -27,6 +37,22 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
     }
 
+    private void Update()
+    {
+        if (AnimatingSprites != null && AnimatingSprites.Length > 0)
+        {
+            deltaTime += Time.deltaTime;
+            while (deltaTime >= FrameSeconds || _mCurrentFrame == 0)
+            {
+                deltaTime = Math.Max(0, deltaTime - FrameSeconds);
+                _mRenderer.sprite = AnimatingSprites[_mCurrentFrame];
+                _mCurrentFrame++;
+                if (_mCurrentFrame >= AnimatingSprites.Length)
+                    _mCurrentFrame = Math.Max(0, LoopFrame);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         EnemyController enemy = collision.GetComponent<EnemyController>();
@@ -35,10 +61,10 @@ public class Bullet : MonoBehaviour
             enemy.Damage((int)power);
             Destroy(gameObject);
         }
-        Level level = collision.GetComponent<Level>();
-        if (level != null)
-        {
-            Destroy(gameObject);
-        }
+        //Level level = collision.GetComponent<Level>();
+        //if (level != null)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }
