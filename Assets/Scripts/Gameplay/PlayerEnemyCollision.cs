@@ -22,24 +22,25 @@ namespace Platformer.Gameplay
 
         public override void Execute()
         {
-            var willHurtEnemy = player.Bounds.center.y >= enemy.Bounds.max.y;
+            var willHurtEnemy = (player.Bounds.center.y >= enemy.Bounds.max.y) && enemy.HurtByJump;
+            float killBounce = 2;
 
             if (willHurtEnemy)
             {
                 enemy.Damage(3);
                 if (!enemy.IsAlive)
                 {
-                    player.Bounce(2);
+                    player.Bounce(killBounce);
                 }
                 else
                 {
-                    player.Bounce(7);
+                    player.Bounce(enemy.BounceAmount);
                 }
             }
             else
             {
                 player.PlayDamageAnimation();
-                player.Damage(1);
+                player.Damage(enemy.ContactDammage);
             }
         }
     }

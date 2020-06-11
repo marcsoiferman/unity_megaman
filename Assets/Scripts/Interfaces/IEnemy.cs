@@ -10,6 +10,9 @@ namespace Assets.Scripts
 {
     public interface IEnemy
     {
+        float BounceAmount { get; }
+        bool HurtByJump {get;}
+        int ContactDammage { get; }
         int EnemyIndex { get; set; }
         bool IsAlive { get; }
         Vector3 StartingPosition { get; set; }
