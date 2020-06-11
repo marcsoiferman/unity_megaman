@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: FrameSeconds
-      value: 0.125
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 9130618751145163435, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}

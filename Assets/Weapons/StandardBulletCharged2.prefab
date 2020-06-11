@@ -128,7 +128,7 @@ MonoBehaviour:
   - {fileID: 8606107501824153910, guid: c03878e11fdd0f043819e94740411104, type: 3}
   - {fileID: 5108340471596631324, guid: c03878e11fdd0f043819e94740411104, type: 3}
   LoopFrame: 2
-  FrameSeconds: 0.125
+  FrameSeconds: 0.05
   Explosion: {fileID: 7634595563752263856, guid: 69aaa6bcda1e01b49a95ae2db0a8334f,
     type: 3}
 --- !u!70 &6447098943937346581
