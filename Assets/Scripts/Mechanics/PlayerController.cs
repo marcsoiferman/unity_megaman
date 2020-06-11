@@ -10,6 +10,7 @@ using TMPro;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using Assets.Weapons;
 
 namespace Platformer.Mechanics
 {
@@ -96,7 +97,7 @@ namespace Platformer.Mechanics
         /*internal new*/ public AudioSource audioSource;
         /*internal new*/ public Collider2D wallCollider2d;
         public Health health;
-        Weapon weapon;
+        PlayerWeapon weapon;
         public bool controlEnabled = true;
 
         public bool dash;
@@ -119,7 +120,7 @@ namespace Platformer.Mechanics
             wallCollider2d = GetComponents<Collider2D>()[1];
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
-            weapon = GetComponent<Weapon>();
+            weapon = GetComponent<PlayerWeapon>();
         }
 
         protected override void Update()
@@ -271,16 +272,16 @@ namespace Platformer.Mechanics
             {
                 switch (weapon.ChargeState)
                 {
-                    case Weapon.ChargingState.Tier0:
+                    case PlayerWeapon.ChargingState.Tier0:
                         spriteRenderer.color = DefaultColor;
                         break;
-                    case Weapon.ChargingState.Tier1:
+                    case PlayerWeapon.ChargingState.Tier1:
                         if (spriteRenderer.color != Stage1ChargingColor)
                             spriteRenderer.color = Stage1ChargingColor;
                         else
                             spriteRenderer.color = DefaultColor;
                         break;
-                    case Weapon.ChargingState.Tier2:
+                    case PlayerWeapon.ChargingState.Tier2:
                         if (spriteRenderer.color != Stage2ChargingColor)
                             spriteRenderer.color = Stage2ChargingColor;
                         else
