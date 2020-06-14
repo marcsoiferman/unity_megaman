@@ -96,6 +96,7 @@ namespace Platformer.Mechanics
         /*internal new*/ public AudioSource audioSource;
         /*internal new*/ public Collider2D wallCollider2d;
         public Health health;
+        public MegamanAnimationController animationController;
         Weapon weapon;
         public bool controlEnabled = true;
 
@@ -103,7 +104,7 @@ namespace Platformer.Mechanics
         bool jump;
         Vector2 move;
         SpriteRenderer spriteRenderer;
-        internal Animator animator;
+        //internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
         private bool againstWall => collidedWall != null;
 
@@ -118,13 +119,14 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             wallCollider2d = GetComponents<Collider2D>()[1];
             spriteRenderer = GetComponent<SpriteRenderer>();
-            animator = GetComponent<Animator>();
+            //animator = GetComponent<Animator>();
+            animationController = GetComponent<MegamanAnimationController>();
             weapon = GetComponent<Weapon>();
         }
 
         protected override void Update()
         {
-            if (controlEnabled)
+            if (controlEnabled && animationController.IsSpawned)
             {
                 move.x = Input.GetAxis("Horizontal");
                 if ((jumpState == JumpState.Grounded || againstWall) && Input.GetButtonDown("Jump"))
@@ -187,7 +189,7 @@ namespace Platformer.Mechanics
 
         public void PlayDamageAnimation()
         {
-            animator.SetTrigger("hurt");
+            //animator.SetTrigger("hurt");
             audioSource.PlayOneShot(ouchAudio);
         }
 
@@ -262,6 +264,12 @@ namespace Platformer.Mechanics
             UpdateDashState();
             UpdateChargingState();
             base.FixedUpdate();
+
+            animationController.IsGrounded = IsGrounded;
+            animationController.YVelocity = velocity.y;
+            animationController.XVelocity = velocity.x;
+            animationController.Jumping = jumpState != JumpState.Grounded;
+            animationController.Dashing = dashState != DashState.NotDashing;
         }
 
         protected void UpdateChargingState()
@@ -314,9 +322,9 @@ namespace Platformer.Mechanics
             if (move.x != 0)
                 UpdateFacingRight(move.x > 0f);
 
-            animator.SetBool("grounded", IsGrounded);
-            animator.SetBool("dashing", dashState != DashState.NotDashing);
-            animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+            //animator.SetBool("grounded", IsGrounded);
+            //animator.SetBool("dashing", dashState != DashState.NotDashing);
+            //animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
             if (againstWall && wallCollider2d.IsTouching(collidedWall))

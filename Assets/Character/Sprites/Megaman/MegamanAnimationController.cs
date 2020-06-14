@@ -2,9 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
-public class MegamanAnimationController : KinematicObject
+public class MegamanAnimationController : MonoBehaviour
 {
     public enum MotionState
     {
@@ -39,25 +40,45 @@ public class MegamanAnimationController : KinematicObject
     private float deltaTime;
     private SpriteRenderer _mRenderer;
 
-    public bool IsSpawned;
+    public bool IsSpawned
+    {
+        get => _IsSpawned;
+        set
+        {
+            if (value != _IsSpawned)
+            {
+                _IsSpawned = value;
+                _mCurrentFrame = 0;
+            }
+        }
+    }
+    private bool _IsSpawned;
+
     public bool Shooting;
+
+    public bool IsGrounded;
     public MotionState AnimationState;
     private MotionState LastAnimationState;
 
-    protected override void Start()
+    public float YVelocity;
+    public float XVelocity;
+    public bool Jumping;
+    public bool Dashing;
+
+    private Queue<MotionState> queuedStates;
+
+    private void Start()
     {
+        queuedStates = new Queue<MotionState>();
         _mRenderer = GetComponent<SpriteRenderer>();
+        LastAnimationState = MotionState.Idle;
         Shooting = false;
         IsSpawned = false;
-
-        base.Start();
     }
 
     // Update is called once per frame
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-
         if (!IsSpawned && !IsGrounded)
         {
             _mRenderer.sprite = SpawningSprites[0];
@@ -79,6 +100,14 @@ public class MegamanAnimationController : KinematicObject
                 IsSpawned = true;
                 AnimationState = MotionState.Idle;
             }
+        }
+        else
+        {
+            MotionState state = DetermineState();
+            if (LastAnimationState == MotionState.Jumping)
+                QueueAnimation(state);
+            else
+                AnimationState = state;
         }
     }
 
@@ -110,6 +139,8 @@ public class MegamanAnimationController : KinematicObject
                         break;
                     case MotionState.Jumping:
                         arr = JumpingSprites;
+                        if (YVelocity != 0)
+                            _mCurrentFrame = JumpPauseFrame;
                         break;
                     case MotionState.Running:
                         arr = RunningSprites;
@@ -131,6 +162,8 @@ public class MegamanAnimationController : KinematicObject
                         break;
                     case MotionState.Jumping:
                         arr = JumpingSpritesShooting;
+                        if (YVelocity != 0)
+                            _mCurrentFrame = JumpPauseFrame;
                         break;
                     case MotionState.Running:
                         arr = RunningSpritesShooting;
@@ -138,6 +171,36 @@ public class MegamanAnimationController : KinematicObject
                 }
             }
         }
+
+        if (_mCurrentFrame != 0 && _mCurrentFrame % arr.Length == 0)
+        {
+            if (queuedStates.Count > 0)
+            {
+                AnimationState = queuedStates.Dequeue();
+                return GetSprite();
+            }
+        }
+
         return arr[_mCurrentFrame % arr.Length];
+    }
+
+    public void QueueAnimation(MotionState state)
+    {
+        if (!queuedStates.Contains(state))
+            queuedStates.Enqueue(state);
+    }
+
+    public MotionState DetermineState()
+    {
+        if (!IsGrounded)
+            return MotionState.Jumping;
+
+        if (Dashing)
+            return MotionState.Dashing;
+
+        if (XVelocity != 0)
+            return MotionState.Running;
+
+        return MotionState.Idle;
     }
 }
