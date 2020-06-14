@@ -132,6 +132,7 @@ namespace Platformer.Mechanics
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
                 {
+                    ForceLeaveEnemyContact();
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
                 }
@@ -199,7 +200,14 @@ namespace Platformer.Mechanics
             {
                 var ev = Schedule<HealthIsZero>();
                 ev.health = health;
+                ForceLeaveEnemyContact();
             }
+        }
+
+        public event Action HasLeftEnemyContact;
+        public void ForceLeaveEnemyContact()
+        {
+            HasLeftEnemyContact?.Invoke();
         }
 
         void UpdateDashState()
@@ -346,6 +354,8 @@ namespace Platformer.Mechanics
         private void OnTriggerEnter2D(Collider2D collision)
         {
             Level level = collision.GetComponent<Level>();
+            SetEnemyCollision(this, collision);
+
             if (level != null)
             {
                 collidedWall = collision;
@@ -377,9 +387,20 @@ namespace Platformer.Mechanics
         private void OnTriggerExit2D(Collider2D collision)
         {
             Level level = collision.GetComponent<Level>();
+            SetEnemyCollision(null, collision);
+
             if (level != null)
             {
                 collidedWall = null;
+            }
+        }
+
+        private void SetEnemyCollision(PlayerController p, Collider2D collision)
+        {
+            EnemyController enemy = collision.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.SetPlayerCollision(p);
             }
         }
 

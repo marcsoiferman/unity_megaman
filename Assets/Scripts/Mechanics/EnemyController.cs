@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using Assets.Scripts;
 using Assets.Scripts.Gameplay;
 using Platformer.Gameplay;
@@ -14,10 +16,12 @@ namespace Platformer.Mechanics
     [RequireComponent(typeof(AnimationController), typeof(Collider2D))]
     public class EnemyController : MonoBehaviour, IEnemy
     {
+        public float ContactDammageCoolDownSeconds => 2;
         public virtual float BounceAmount => 7;
         public virtual bool HurtByJump => true;
         public virtual int ContactDammage => 2;
-
+        protected float contactDeltaTime;
+        protected PlayerController _inContactPlayer;
 
         public PatrolPath path;
         public AudioClip ouch { get; protected set; }
@@ -52,14 +56,31 @@ namespace Platformer.Mechanics
 
         void OnCollisionEnter2D(Collision2D collision)
         {
+            //Checks if enemy hit player    
             var player = collision.gameObject.GetComponent<PlayerController>();
             if (player != null)
             {
-                var ev = Schedule<PlayerEnemyCollision>();
-                ev.player = player;
-                ev.enemy = this;
+                SetPlayerCollision(player);
             }
         }
+
+        void OnTriggerExit2d(Collision2D collision)
+        {
+            RemovePlayerCollision();
+        }
+
+        private void SchedulePlayerCollision()
+        {
+            if (contactDeltaTime <= ContactDammageCoolDownSeconds)
+                return;
+
+            var ev = Schedule<PlayerEnemyCollision>();
+            ev.player = _inContactPlayer;
+            ev.enemy = this;
+
+            contactDeltaTime = 0;
+        }
+
         public void Respawn()
         {
 
@@ -68,15 +89,18 @@ namespace Platformer.Mechanics
             this.control.enabled = true;
             health.Respawn(); 
         }
-
-
         void Update()
         {
+            contactDeltaTime += Time.deltaTime;
+
             if (path != null)
             {
                 if (mover == null) mover = path.CreateMover(control.maxSpeed * 0.5f);
                 control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
             }
+
+            if (_inContactPlayer != null)
+                SchedulePlayerCollision();
         }
         public void Damage(int amount = 1)
         {
@@ -87,6 +111,18 @@ namespace Platformer.Mechanics
                 player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
                 Schedule<EnemyDeath>().enemy = this;
             }
+        }
+
+        internal void SetPlayerCollision(PlayerController p)
+        {
+            _inContactPlayer = p;
+            p.HasLeftEnemyContact += RemovePlayerCollision;
+        }
+
+        private void RemovePlayerCollision()
+        {
+            _inContactPlayer.HasLeftEnemyContact -= RemovePlayerCollision;
+            _inContactPlayer = null;
         }
     }
 }
