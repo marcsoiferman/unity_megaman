@@ -6,79 +6,47 @@ using UnityEngine;
 
 public class MegamanAnimationController : KinematicObject
 {
+    public enum MotionState
+    {
+        Idle,
+        Running,
+        Dashing,
+        Jumping
+    }
+
     // Start is called before the first frame update
     public Sprite[] RunningSprites;
     public Sprite[] RunningSpritesShooting;
+
+    public Sprite[] IdleSprites;
+    public Sprite[] IdleSpritesShooting;
+
+    public Sprite[] DashingSprites;
+    public Sprite[] DashingSpritesShooting;
+
+    public Sprite[] JumpingSprites;
+    public Sprite[] JumpingSpritesShooting;
+
+    public Sprite[] SpawningSprites;
+
+    public int DashPauseFrame;
+    public int JumpPauseFrame;
+
+    public int FrameCount;
+
     public float FrameSeconds;
     private int _mCurrentFrame;
     private float deltaTime;
     private SpriteRenderer _mRenderer;
-    private Rigidbody2D _mRigidBody;
 
     public bool IsSpawned;
-
     public bool Shooting;
-    public bool _Shooting
-    {
-        get
-        {
-            return _shooting;
-        }
-        set
-        {
-            if (_shooting != value)
-            {
-                _shooting = value;
-                animator.SetFloat("walkframe", animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1);
-                animator.SetBool("shooting", _Shooting);
-            }
-        }
-    }
-    private bool _shooting;
-    internal Animator animator;
-
-
-    public int AnimationState;
-    public int _AnimationState
-    {
-        get
-        {
-            return _animationState;
-        }
-        set
-        {
-            if (_animationState != value)
-            {
-                _animationState = value;
-                animator.SetInteger("animationState", _animationState);
-            }
-        }
-    }
-    private int _animationState;
-
-
-    private bool _Grounded
-    {
-        get
-        {
-            return _grounded;
-        }
-        set
-        {
-            if (_grounded != value)
-            {
-                _grounded = value;
-                animator.SetBool("grounded", _grounded);
-            }
-        }
-    }
-    private bool _grounded;
+    public MotionState AnimationState;
+    private MotionState LastAnimationState;
 
     protected override void Start()
     {
         _mRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        _mRigidBody = GetComponent<Rigidbody2D>();
         Shooting = false;
         IsSpawned = false;
 
@@ -89,34 +57,87 @@ public class MegamanAnimationController : KinematicObject
     protected override void Update()
     {
         base.Update();
-        _Shooting = Shooting;
-        _AnimationState = AnimationState;
-        _Grounded = IsGrounded;
+
+        if (!IsSpawned && !IsGrounded)
+        {
+            _mRenderer.sprite = SpawningSprites[0];
+            return;
+        }
+
+        deltaTime += Time.deltaTime;
+        while (deltaTime >= FrameSeconds)
+        {
+            deltaTime = Math.Max(0, deltaTime - FrameSeconds);
+            _mCurrentFrame++;
+            _mRenderer.sprite = GetSprite();
+        }
 
         if (!IsSpawned)
         {
-            if (animator.GetAnimatorTransitionInfo(0).IsName("MegamanSpawn -> MegamanIdle"))
+            if (_mCurrentFrame >= SpawningSprites.Length - 1)
             {
                 IsSpawned = true;
-                AnimationState = 0;
+                AnimationState = MotionState.Idle;
             }
         }
-        //deltaTime += Time.deltaTime;
-        //while (deltaTime >= FrameSeconds)
-        //{
-        //    deltaTime = Math.Max(0, deltaTime - FrameSeconds);
-        //    _mCurrentFrame++;
-        //    _mRenderer.sprite = GetSprite();
-        //}
     }
 
     private Sprite GetSprite()
     {
+        if (LastAnimationState != AnimationState)
+            _mCurrentFrame = 0;
+
         Sprite[] arr = RunningSprites;
 
-        if (Shooting)
-            arr = RunningSpritesShooting;
+        if (!IsSpawned)
+        {
+            arr = SpawningSprites;
+        }
+        else
+        {
+            LastAnimationState = AnimationState;
+            if (!Shooting)
+            {
+                switch (AnimationState)
+                {
+                    case MotionState.Dashing:
+                        arr = DashingSprites;
+                        if (_mCurrentFrame > DashPauseFrame)
+                            _mCurrentFrame = DashPauseFrame;
+                        break;
+                    case MotionState.Idle:
+                        arr = IdleSprites;
+                        break;
+                    case MotionState.Jumping:
+                        arr = JumpingSprites;
+                        break;
+                    case MotionState.Running:
+                        arr = RunningSprites;
+                        break;
+                }
+            }
 
+            if (Shooting)
+            {
+                switch (AnimationState)
+                {
+                    case MotionState.Dashing:
+                        arr = DashingSpritesShooting;
+                        if (_mCurrentFrame > DashPauseFrame)
+                            _mCurrentFrame = DashPauseFrame;
+                        break;
+                    case MotionState.Idle:
+                        arr = IdleSpritesShooting;
+                        break;
+                    case MotionState.Jumping:
+                        arr = JumpingSpritesShooting;
+                        break;
+                    case MotionState.Running:
+                        arr = RunningSpritesShooting;
+                        break;
+                }
+            }
+        }
         return arr[_mCurrentFrame % arr.Length];
     }
 }
