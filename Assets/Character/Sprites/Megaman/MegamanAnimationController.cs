@@ -40,6 +40,9 @@ public class MegamanAnimationController : MonoBehaviour
     private float deltaTime;
     private SpriteRenderer _mRenderer;
 
+    public float StopShootingLagTime;
+    private float _StopShootingTime;
+
     public bool IsSpawned
     {
         get => _IsSpawned;
@@ -54,8 +57,8 @@ public class MegamanAnimationController : MonoBehaviour
     }
     private bool _IsSpawned;
 
-    public bool Shooting;
-
+    private bool _StopShootingTriggered;
+    private bool IsShooting;
     public bool IsGrounded;
     public MotionState AnimationState;
     private MotionState LastAnimationState;
@@ -72,7 +75,7 @@ public class MegamanAnimationController : MonoBehaviour
         queuedStates = new Queue<MotionState>();
         _mRenderer = GetComponent<SpriteRenderer>();
         LastAnimationState = MotionState.Idle;
-        Shooting = false;
+        IsShooting = false;
         IsSpawned = false;
     }
 
@@ -83,6 +86,16 @@ public class MegamanAnimationController : MonoBehaviour
         {
             _mRenderer.sprite = SpawningSprites[0];
             return;
+        }
+
+        if (_StopShootingTriggered)
+        {
+            _StopShootingTime += Time.deltaTime;
+            if (_StopShootingTime >= StopShootingLagTime)
+            {
+                IsShooting = false;
+                _StopShootingTriggered = false;
+            }
         }
 
         deltaTime += Time.deltaTime;
@@ -125,7 +138,7 @@ public class MegamanAnimationController : MonoBehaviour
         else
         {
             LastAnimationState = AnimationState;
-            if (!Shooting)
+            if (!IsShooting)
             {
                 switch (AnimationState)
                 {
@@ -148,7 +161,7 @@ public class MegamanAnimationController : MonoBehaviour
                 }
             }
 
-            if (Shooting)
+            if (IsShooting)
             {
                 switch (AnimationState)
                 {
@@ -202,5 +215,17 @@ public class MegamanAnimationController : MonoBehaviour
             return MotionState.Running;
 
         return MotionState.Idle;
+    }
+
+    public void SetShooting(bool shooting)
+    {
+        if (shooting)
+            IsShooting = true;
+        else
+        {
+            if (!_StopShootingTriggered)
+                _StopShootingTime = 0;
+            _StopShootingTriggered = true;
+        }
     }
 }

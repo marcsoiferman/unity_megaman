@@ -28,11 +28,13 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool shooting = false;
         deltaTime += Time.deltaTime;
         if (Input.GetButtonDown("Fire1"))
         {
             ChargeState = ChargingState.Tier0;
             Shoot(1);
+            shooting = true;
         }
         if (Input.GetButton("Fire1") && !charging)
         {
@@ -55,7 +57,10 @@ public class Weapon : MonoBehaviour
                     Shoot(3);
                     break;
             }
+            shooting = true;
         }
+
+        player.animationController.SetShooting(shooting);
     }
 
     private void FixedUpdate()
