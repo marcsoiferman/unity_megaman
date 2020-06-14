@@ -220,7 +220,10 @@ public class MegamanAnimationController : MonoBehaviour
     public void SetShooting(bool shooting)
     {
         if (shooting)
+        {
             IsShooting = true;
+            _StopShootingTriggered = false;
+        }
         else
         {
             if (!_StopShootingTriggered)
