@@ -106,7 +106,7 @@ namespace Platformer.Mechanics
         SpriteRenderer spriteRenderer;
         //internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-        private bool againstWall => collidedWall != null;
+        private bool againstWall => hitWallLeft || hitWallRight;
 
         private bool hitWallLeft = false;
         private bool hitWallRight = false;
@@ -335,8 +335,6 @@ namespace Platformer.Mechanics
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
             if (pressingAgainstWall)
                 finalMove.x = 0;
-            else
-                collidedWall = null;
 
             targetVelocity = finalMove * maxSpeed;
         }
@@ -352,7 +350,6 @@ namespace Platformer.Mechanics
         private void Flip()
         {
             facingRight = !facingRight;
-            collidedWall = null;
             transform.Rotate(0f, 180f, 0f);
         }
 
@@ -361,8 +358,6 @@ namespace Platformer.Mechanics
             Level level = collision.GetComponent<Level>();
             if (level != null)
             {
-                collidedWall = collision;
-                animationController.IsWallSliding = true;
                 wallJumping = false;
                 List<ContactPoint2D> points = new List<ContactPoint2D>();
                 int count = collision.GetContacts(points);
@@ -376,7 +371,6 @@ namespace Platformer.Mechanics
                         hitWallLeft = hitLeft;
                         hitWallRight = hitRight;
 
-                        collidedWall = collision;
                         wallJumping = false;
                     }
                 }
@@ -417,8 +411,6 @@ namespace Platformer.Mechanics
             return false;
         }
 
-        private Collider2D collidedWall = null;
-
         private void OnTriggerExit2D(Collider2D collision)
         {
             Level level = collision.GetComponent<Level>();
@@ -428,7 +420,6 @@ namespace Platformer.Mechanics
                 hitWallRight = false;
                 pressingAgainstWall = false;
 
-                collidedWall = null;
                 animationController.IsWallSliding = false;
             }
         }
