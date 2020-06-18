@@ -358,26 +358,60 @@ namespace Platformer.Mechanics
                 collidedWall = collision;
                 animationController.IsWallSliding = true;
                 wallJumping = false;
-                //List<ContactPoint2D> points = new List<ContactPoint2D>();
-                //Collider2D[] colliders = { wallCollider2d };
-                //int count = collision.GetContacts(points);
-                //if (count > 0)
-                //{
-                //    ContactPoint2D point = points.FirstOrDefault(a => a.collider.GetComponent<PlayerController>() != null);
-                //    if (point.collider != null && point.collider.GetComponent<PlayerController>() != null)
-                //    {
-                //        Vector2 diff = point.point - new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y);
-                //        UnityEngine.Debug.Log($"{point.point.x} {this.transform.position.x}");
-                //        if (diff.x < 0)
-                //            UnityEngine.Debug.Log($"Right!");
-                //        else
-                //            UnityEngine.Debug.Log($"Left!");
+                List<ContactPoint2D> points = new List<ContactPoint2D>();
+                Collider2D[] colliders = { wallCollider2d };
+                int count = collision.GetContacts(points);
+                if (count > 0)
+                {
+                    bool hitLeft = IsHitFromLeft();
+                    bool hitRight = IsHitFromRight();
 
-                //        collidedWall = collision;
-                //        wallJumping = false;
-                //    }
-                //}
+                    if (hitLeft || hitRight)
+                    {
+                        if (hitRight)
+                            UnityEngine.Debug.Log($"Right!");
+                        else
+                            UnityEngine.Debug.Log($"Left!");
+
+                        collidedWall = collision;
+                        wallJumping = false;
+                    }
+                }
             }
+        }
+
+        private bool IsHitFromLeft()
+        {
+            Vector2 posCharTop = new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y - wallCollider2d.bounds.extents.y);
+            Vector2 posCharMid = new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y);
+            Vector2 posCharBottom = new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y + wallCollider2d.bounds.extents.y);
+            Vector2[] positions = { posCharTop, posCharMid, posCharBottom };
+
+            foreach(Vector2 pos in positions)
+            {
+                RaycastHit2D hit = Physics2D.Linecast(pos, pos - new Vector2(0.5f, 0), 1 << LayerMask.NameToLayer("Level"));
+                if (hit.collider != null)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private bool IsHitFromRight()
+        {
+            Vector2 posCharTop = new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y - wallCollider2d.bounds.extents.y);
+            Vector2 posCharMid = new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y);
+            Vector2 posCharBottom = new Vector2(wallCollider2d.bounds.center.x, wallCollider2d.bounds.center.y + wallCollider2d.bounds.extents.y);
+            Vector2[] positions = { posCharTop, posCharMid, posCharBottom };
+
+            foreach (Vector2 pos in positions)
+            {
+                RaycastHit2D hit = Physics2D.Linecast(pos, pos + new Vector2(0.5f, 0), 1 << LayerMask.NameToLayer("Level"));
+                if (hit.collider != null)
+                    return true;
+            }
+
+            return false;
         }
 
         private Collider2D collidedWall = null;
