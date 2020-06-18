@@ -356,6 +356,7 @@ namespace Platformer.Mechanics
             if (level != null)
             {
                 collidedWall = collision;
+                animationController.IsWallSliding = true;
                 wallJumping = false;
                 //List<ContactPoint2D> points = new List<ContactPoint2D>();
                 //Collider2D[] colliders = { wallCollider2d };
@@ -387,6 +388,7 @@ namespace Platformer.Mechanics
             if (level != null)
             {
                 collidedWall = null;
+                animationController.IsWallSliding = false;
             }
         }
 

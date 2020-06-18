@@ -12,7 +12,8 @@ public class MegamanAnimationController : MonoBehaviour
         Idle,
         Running,
         Dashing,
-        Jumping
+        Jumping,
+        WallSliding
     }
 
     // Start is called before the first frame update
@@ -29,6 +30,9 @@ public class MegamanAnimationController : MonoBehaviour
     public Sprite[] JumpingSpritesShooting;
 
     public Sprite[] SpawningSprites;
+
+    public Sprite[] WallSlidingSprites;
+    public Sprite[] WallSlidingSpritesShooting;
 
     public int DashPauseFrame;
     public int JumpPauseFrame;
@@ -60,6 +64,7 @@ public class MegamanAnimationController : MonoBehaviour
     private bool _StopShootingTriggered;
     private bool IsShooting;
     public bool IsGrounded;
+    public bool IsWallSliding;
     public MotionState AnimationState;
     private MotionState LastAnimationState;
 
@@ -77,6 +82,8 @@ public class MegamanAnimationController : MonoBehaviour
         LastAnimationState = MotionState.Idle;
         IsShooting = false;
         IsSpawned = false;
+        IsWallSliding = false;
+        IsGrounded = false;
     }
 
     // Update is called once per frame
@@ -117,7 +124,7 @@ public class MegamanAnimationController : MonoBehaviour
         else
         {
             MotionState state = DetermineState();
-            if (LastAnimationState == MotionState.Jumping)
+            if (LastAnimationState == MotionState.Jumping && state != MotionState.WallSliding)
                 QueueAnimation(state);
             else
                 AnimationState = state;
@@ -158,6 +165,9 @@ public class MegamanAnimationController : MonoBehaviour
                     case MotionState.Running:
                         arr = RunningSprites;
                         break;
+                    case MotionState.WallSliding:
+                        arr = WallSlidingSprites;
+                        break;
                 }
             }
 
@@ -180,6 +190,9 @@ public class MegamanAnimationController : MonoBehaviour
                         break;
                     case MotionState.Running:
                         arr = RunningSpritesShooting;
+                        break;
+                    case MotionState.WallSliding:
+                        arr = WallSlidingSpritesShooting;
                         break;
                 }
             }
@@ -205,6 +218,9 @@ public class MegamanAnimationController : MonoBehaviour
 
     public MotionState DetermineState()
     {
+        if (IsWallSliding && !IsGrounded)
+            return MotionState.WallSliding;
+
         if (!IsGrounded)
             return MotionState.Jumping;
 
