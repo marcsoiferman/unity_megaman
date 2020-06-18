@@ -127,12 +127,18 @@ namespace Platformer.Mechanics
             animationController = GetComponent<MegamanAnimationController>();
             weapon = GetComponent<Weapon>();
         }
-
+        private bool lastState = false;
         protected override void Update()
         {
+            pressingAgainstWall = false;
             if (controlEnabled && animationController.IsSpawned)
             {
                 move.x = Input.GetAxis("Horizontal");
+                if (move.x > 0 && hitWallRight)
+                    pressingAgainstWall = true;
+                if (move.x < 0 && hitWallLeft)
+                    pressingAgainstWall = true;
+
                 if ((jumpState == JumpState.Grounded || againstWall) && Input.GetButtonDown("Jump"))
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
@@ -155,6 +161,20 @@ namespace Platformer.Mechanics
                 move.x = 0;
             }
             UpdateJumpState();
+
+            //if (lastState != pressingAgainstWall)
+            //{
+            //    UnityEngine.Debug.Log($"Switched! {pressingAgainstWall}");
+            //    lastState = pressingAgainstWall;
+            //}
+
+            FixYVelocity = false;
+            if (velocity.y < 0 && pressingAgainstWall)
+            {
+                FixYVelocity = true;
+                FixedYVelocity = -1;
+            }
+
             base.Update();
         }
 
@@ -269,6 +289,7 @@ namespace Platformer.Mechanics
             UpdateChargingState();
             base.FixedUpdate();
 
+            animationController.IsWallSliding = velocity.y < 0 && pressingAgainstWall;
             animationController.IsGrounded = IsGrounded;
             animationController.YVelocity = velocity.y;
             animationController.XVelocity = velocity.x;
@@ -309,6 +330,7 @@ namespace Platformer.Mechanics
                 wallJumping = againstWall && !IsGrounded;
                 if (wallJumping)
                     wallBoostDuration = wallJumpDuration;
+                FixYVelocity = false;
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
                 jump = false;
             }
@@ -325,12 +347,6 @@ namespace Platformer.Mechanics
 
             if (move.x != 0)
                 UpdateFacingRight(move.x > 0f);
-
-            pressingAgainstWall = false;
-            if (move.x > 0 && hitWallRight)
-                pressingAgainstWall = true;
-            if (move.x < 0 && hitWallLeft)
-                pressingAgainstWall = true;
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
             if (pressingAgainstWall)

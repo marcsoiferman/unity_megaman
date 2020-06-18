@@ -53,6 +53,9 @@ namespace Platformer.Mechanics
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
 
+        protected bool FixYVelocity = false;
+        protected float FixedYVelocity;
+
         public void ResetGrounding()
         {
             groundNormal = new Vector2(0, 0);
@@ -127,6 +130,9 @@ namespace Platformer.Mechanics
                 velocity += Physics2D.gravity * Time.deltaTime;
 
             velocity.x = targetVelocity.x;
+
+            if (FixYVelocity)
+                velocity.y = FixedYVelocity;
 
             if (wallBoostDuration > 0)
             {
