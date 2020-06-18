@@ -108,6 +108,10 @@ namespace Platformer.Mechanics
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
         private bool againstWall => collidedWall != null;
 
+        private bool hitWallLeft = false;
+        private bool hitWallRight = false;
+        private bool pressingAgainstWall = false;
+
         public Bounds Bounds => collider2d.bounds;
 
         public event Action OnRespawn;
@@ -322,12 +326,14 @@ namespace Platformer.Mechanics
             if (move.x != 0)
                 UpdateFacingRight(move.x > 0f);
 
-            //animator.SetBool("grounded", IsGrounded);
-            //animator.SetBool("dashing", dashState != DashState.NotDashing);
-            //animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+            pressingAgainstWall = false;
+            if (move.x > 0 && hitWallRight)
+                pressingAgainstWall = true;
+            if (move.x < 0 && hitWallLeft)
+                pressingAgainstWall = true;
 
             Vector2 finalMove = new Vector2(tempDashVelocity != 0 ? tempDashVelocity : move.x, move.y);
-            if (againstWall && wallCollider2d.IsTouching(collidedWall))
+            if (pressingAgainstWall)
                 finalMove.x = 0;
             else
                 collidedWall = null;
@@ -359,7 +365,6 @@ namespace Platformer.Mechanics
                 animationController.IsWallSliding = true;
                 wallJumping = false;
                 List<ContactPoint2D> points = new List<ContactPoint2D>();
-                Collider2D[] colliders = { wallCollider2d };
                 int count = collision.GetContacts(points);
                 if (count > 0)
                 {
@@ -368,10 +373,8 @@ namespace Platformer.Mechanics
 
                     if (hitLeft || hitRight)
                     {
-                        if (hitRight)
-                            UnityEngine.Debug.Log($"Right!");
-                        else
-                            UnityEngine.Debug.Log($"Left!");
+                        hitWallLeft = hitLeft;
+                        hitWallRight = hitRight;
 
                         collidedWall = collision;
                         wallJumping = false;
@@ -421,6 +424,10 @@ namespace Platformer.Mechanics
             Level level = collision.GetComponent<Level>();
             if (level != null)
             {
+                hitWallLeft = false;
+                hitWallRight = false;
+                pressingAgainstWall = false;
+
                 collidedWall = null;
                 animationController.IsWallSliding = false;
             }
