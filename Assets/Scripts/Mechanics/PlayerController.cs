@@ -127,7 +127,7 @@ namespace Platformer.Mechanics
             animationController = GetComponent<MegamanAnimationController>();
             weapon = GetComponent<Weapon>();
         }
-        private bool lastState = false;
+
         protected override void Update()
         {
             pressingAgainstWall = false;
@@ -161,12 +161,6 @@ namespace Platformer.Mechanics
                 move.x = 0;
             }
             UpdateJumpState();
-
-            //if (lastState != pressingAgainstWall)
-            //{
-            //    UnityEngine.Debug.Log($"Switched! {pressingAgainstWall}");
-            //    lastState = pressingAgainstWall;
-            //}
 
             FixYVelocity = false;
             if (velocity.y < 0 && pressingAgainstWall)
