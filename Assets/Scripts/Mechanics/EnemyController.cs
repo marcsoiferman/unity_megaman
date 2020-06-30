@@ -16,6 +16,9 @@ namespace Platformer.Mechanics
     [RequireComponent(typeof(AnimationController), typeof(Collider2D))]
     public class EnemyController : MonoBehaviour, IEnemy
     {
+        protected bool facingRight = false;
+
+        public Component ComponentFacing;
         public float ContactDammageCoolDownSeconds => 2;
         public virtual float BounceAmount => 7;
         public virtual bool HurtByJump => true;
@@ -83,13 +86,12 @@ namespace Platformer.Mechanics
 
         public void Respawn()
         {
-
             this._collider.enabled = true;
             this.control.Teleport(StartingPosition);
             this.control.enabled = true;
             health.Respawn(); 
         }
-        void Update()
+        protected virtual void Update()
         {
             contactDeltaTime += Time.deltaTime;
 
@@ -101,8 +103,23 @@ namespace Platformer.Mechanics
 
             if (_inContactPlayer != null)
                 SchedulePlayerCollision();
+
+            CheckPlayerDirection();
         }
-        public void Damage(int amount = 1)
+
+        private void CheckPlayerDirection()
+        {
+            if (ComponentFacing is null) return;
+
+            bool playerToTheRight = this.transform.position.x < ComponentFacing.transform.position.x;
+            bool flipToRight = playerToTheRight && !facingRight;
+            bool flipToLeft = !playerToTheRight && facingRight;
+
+            if (flipToLeft || flipToRight)
+                Flip();
+        }
+
+        public virtual void Damage(int amount = 1)
         {
             health.Decrement(amount);
             if (!health.IsAlive)
@@ -110,19 +127,35 @@ namespace Platformer.Mechanics
                 PlayerController player = UnityEngine.Object.FindObjectOfType<PlayerController>();
                 player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
                 Schedule<EnemyDeath>().enemy = this;
+                RemovePlayerCollision();
             }
         }
 
         internal void SetPlayerCollision(PlayerController p)
         {
+            if (p is null)
+            {
+                RemovePlayerCollision();
+                return;
+            }
+
             _inContactPlayer = p;
             p.HasLeftEnemyContact += RemovePlayerCollision;
         }
 
         private void RemovePlayerCollision()
         {
+            if (_inContactPlayer is null)
+                return;
+
             _inContactPlayer.HasLeftEnemyContact -= RemovePlayerCollision;
             _inContactPlayer = null;
+        }
+
+        private void Flip()
+        {
+            facingRight = !facingRight;
+            transform.Rotate(0f, 180f, 0f);
         }
     }
 }

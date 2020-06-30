@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Assets.Weapons
 {
-    public class PlayerWeapon: Weapon
+    public class PlayerWeapon: Weapon<PlayerBullet>
     {
         public GameObject bulletPrefabCharged1;
         public GameObject bulletPrefabCharged2;

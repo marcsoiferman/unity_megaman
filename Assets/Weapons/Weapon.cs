@@ -1,11 +1,12 @@
-﻿using Platformer.Mechanics;
+﻿using Assets.Weapons;
+using Platformer.Mechanics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon<T> :MonoBehaviour where T :Bullet
 {
     public Transform firePoint;
     public GameObject bulletPrefabNormal;
@@ -14,15 +15,22 @@ public class Weapon : MonoBehaviour
     public int MaxBullets;
     protected float deltaTime;
 
+    public bool IsEnabled { get; set; }
+
     private void Start()
     {
+        IsEnabled = true;
         deltaTime = FireCooldownSeconds; //let you shoot immediately
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        
+        if (IsEnabled)
+        {
+            deltaTime += Time.deltaTime;
+            Shoot(1);
+        }
     }
 
     protected void Shoot(float power)
@@ -33,7 +41,7 @@ public class Weapon : MonoBehaviour
         GameObject prefab = GetPrefabBullet(power);
 
         GameObject obj = Instantiate(prefab, firePoint.position, firePoint.rotation);
-        Bullet bullet = obj.GetComponent<Bullet>();
+        T bullet = obj.GetComponent<T>();
         if (bullet != null)
         {
             bullet.SetPower(power);
