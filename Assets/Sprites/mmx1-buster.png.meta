@@ -1,0 +1,1088 @@
+fileFormatVersion: 2
+guid: c03878e11fdd0f043819e94740411104
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1763911723152408263
+    second: mmx1-buster_0
+  - first:
+      213: -5276883874321848007
+    second: mmx1-buster_1
+  - first:
+      213: -29561040982941344
+    second: mmx1-buster_2
+  - first:
+      213: -3997405699895402171
+    second: mmx1-buster_3
+  - first:
+      213: -6108468808617680215
+    second: mmx1-buster_4
+  - first:
+      213: 5619487256798038841
+    second: mmx1-buster_5
+  - first:
+      213: -1380148004999957638
+    second: mmx1-buster_6
+  - first:
+      213: -4606384160018768459
+    second: mmx1-buster_7
+  - first:
+      213: 6653091457700542288
+    second: mmx1-buster_8
+  - first:
+      213: 7401559982705190782
+    second: mmx1-buster_9
+  - first:
+      213: 7017752382199225629
+    second: mmx1-buster_10
+  - first:
+      213: -5720728092028992717
+    second: mmx1-buster_11
+  - first:
+      213: 841721630917344878
+    second: mmx1-buster_12
+  - first:
+      213: 5490081279905572969
+    second: mmx1-buster_13
+  - first:
+      213: -5012883233300713898
+    second: mmx1-buster_14
+  - first:
+      213: -6456018593271530444
+    second: mmx1-buster_15
+  - first:
+      213: 1616216164800660337
+    second: mmx1-buster_16
+  - first:
+      213: 6338944551680996025
+    second: mmx1-buster_17
+  - first:
+      213: -3877858031382602788
+    second: mmx1-buster_18
+  - first:
+      213: 8606107501824153910
+    second: mmx1-buster_19
+  - first:
+      213: 5108340471596631324
+    second: mmx1-buster_20
+  - first:
+      213: 4233729938673836288
+    second: mmx1-buster_21
+  - first:
+      213: 3849428419972731802
+    second: mmx1-buster_22
+  - first:
+      213: -4992517953035512688
+    second: mmx1-buster_23
+  - first:
+      213: 7118990668415750032
+    second: mmx1-buster_24
+  - first:
+      213: -8646265954638814632
+    second: mmx1-buster_25
+  - first:
+      213: 2530885029459466565
+    second: mmx1-buster_26
+  - first:
+      213: -8838476392294699052
+    second: mmx1-buster_27
+  - first:
+      213: -274444250076232709
+    second: mmx1-buster_28
+  - first:
+      213: -68109589572317358
+    second: mmx1-buster_29
+  - first:
+      213: 3734203906224853702
+    second: mmx1-buster_30
+  - first:
+      213: 6061858930803843309
+    second: mmx1-buster_31
+  - first:
+      213: -6249729144937723250
+    second: mmx1-buster_32
+  - first:
+      213: -7573126384236575232
+    second: mmx1-buster_33
+  - first:
+      213: -2911597887259016584
+    second: mmx1-buster_34
+  - first:
+      213: 7440186105498912033
+    second: mmx1-buster_35
+  - first:
+      213: -7514629966339703516
+    second: mmx1-buster_36
+  - first:
+      213: -5333900782165202794
+    second: mmx1-buster_37
+  - first:
+      213: -347165133262087903
+    second: mmx1-buster_38
+  - first:
+      213: -1355367970992994135
+    second: mmx1-buster_39
+  - first:
+      213: -1890612881883893688
+    second: mmx1-buster_40
+  - first:
+      213: -6938900304355263818
+    second: mmx1-buster_41
+  - first:
+      213: 4209436825978783792
+    second: mmx1-buster_42
+  - first:
+      213: -1720349184176510197
+    second: mmx1-buster_43
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mmx1-buster_0
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 138
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ce75a9dd5caa7810800000000000000
+      internalID: 1763911723152408263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_1
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 134
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9392f0e031eb4c6b0800000000000000
+      internalID: -5276883874321848007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 133
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 061650dc36af69ff0800000000000000
+      internalID: -29561040982941344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 132
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 541ec92f1bc5688c0800000000000000
+      internalID: -3997405699895402171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_4
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 113
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a22acc8bfb5a3ba0800000000000000
+      internalID: -6108468808617680215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_5
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 108
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93b084103ed6cfd40800000000000000
+      internalID: 5619487256798038841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_6
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 110
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a737388a3bab8dce0800000000000000
+      internalID: -1380148004999957638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_7
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 110
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bd581b1306d210c0800000000000000
+      internalID: -4606384160018768459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_8
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 110
+        width: 40
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0573d626e67845c50800000000000000
+      internalID: 6653091457700542288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_9
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 110
+        width: 36
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e77a3e0d69f97b660800000000000000
+      internalID: 7401559982705190782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_10
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 110
+        width: 38
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1dd2a62c90146160800000000000000
+      internalID: 7017752382199225629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_11
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 109
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 333830a2c14eb90b0800000000000000
+      internalID: -5720728092028992717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_12
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 109
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e379a1d556eab00800000000000000
+      internalID: 841721630917344878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_14
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 109
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65e699a3249ae6ab0800000000000000
+      internalID: -5012883233300713898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_15
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 66
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43cbbbc7b4d9766a0800000000000000
+      internalID: -6456018593271530444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_16
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 82
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 173003fe904fd6610800000000000000
+      internalID: 1616216164800660337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_17
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 83
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b2f7dd0c7478f750800000000000000
+      internalID: 6338944551680996025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_18
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 75
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdb5b0e8aa41f2ac0800000000000000
+      internalID: -3877858031382602788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_19
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 75
+        width: 40
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6399d010d290f6770800000000000000
+      internalID: 8606107501824153910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_20
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 75
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c15c441089874e640800000000000000
+      internalID: 5108340471596631324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_21
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 72
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 001279da2fa31ca30800000000000000
+      internalID: 4233729938673836288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_22
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 72
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9394c8b0caeb6530800000000000000
+      internalID: 3849428419972731802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_23
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 72
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 094de8a8f5307bab0800000000000000
+      internalID: -4992517953035512688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_24
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 72
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09fcd3e7b4cbbc260800000000000000
+      internalID: 7118990668415750032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_30
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 43
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c298650bae82d330800000000000000
+      internalID: 3734203906224853702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_31
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 41
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de0a719949c002450800000000000000
+      internalID: 6061858930803843309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_32
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 40
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8ac49584708449a0800000000000000
+      internalID: -6249729144937723250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_33
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 39
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 006c07c7da9d6e690800000000000000
+      internalID: -7573126384236575232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_34
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 15
+        width: 15
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8720629d52de797d0800000000000000
+      internalID: -2911597887259016584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_35
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 11
+        width: 21
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1254f09d7d9d04760800000000000000
+      internalID: 7440186105498912033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_36
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 6
+        width: 31
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42df0dd1cdba6b790800000000000000
+      internalID: -7514629966339703516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_37
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 6
+        width: 32
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6986dd3bf7d2af5b0800000000000000
+      internalID: -5333900782165202794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_38
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 7
+        width: 24
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1291381962f9e2bf0800000000000000
+      internalID: -347165133262087903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_39
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 15
+        width: 13
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a8450de204c03de0800000000000000
+      internalID: -1355367970992994135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_40
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 32
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 840788fc99133c5e0800000000000000
+      internalID: -1890612881883893688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_41
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 31
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bafd03efe214bf90800000000000000
+      internalID: -6938900304355263818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_42
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 29
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 038c9ec9d7cea6a30800000000000000
+      internalID: 4209436825978783792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_13
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 109
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9682bcc16dfa03c40800000000000000
+      internalID: 5490081279905572969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_25
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 109
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85223349cea420880800000000000000
+      internalID: -8646265954638814632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mmx1-buster_26
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 72
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 549194c66828f1320800000000000000
+      internalID: 2530885029459466565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
