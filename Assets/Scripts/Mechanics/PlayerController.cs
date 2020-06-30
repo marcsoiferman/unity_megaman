@@ -137,12 +137,16 @@ namespace Platformer.Mechanics
             if (controlEnabled && animationController.IsSpawned)
             {
                 move.x = Input.GetAxis("Horizontal");
+                if (wallBoostDuration > 0)
+                {
+                    move.x = 0;
+                }
                 if (move.x > 0 && hitWallRight)
                     pressingAgainstWall = true;
                 if (move.x < 0 && hitWallLeft)
                     pressingAgainstWall = true;
 
-                if ((jumpState == JumpState.Grounded || againstWall) && Input.GetButtonDown("Jump"))
+                if ((jumpState == JumpState.Grounded || pressingAgainstWall) && Input.GetButtonDown("Jump"))
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
                 {
@@ -150,7 +154,7 @@ namespace Platformer.Mechanics
                     Schedule<PlayerStopJump>().player = this;
                 }
 
-                if (Input.GetButtonDown("Dash") && this.IsGrounded && dashState == DashState.NotDashing)
+                if (Input.GetButtonDown("Dash") && (this.IsGrounded || pressingAgainstWall) && dashState == DashState.NotDashing)
                 {
                     dashState = DashState.PrepareToDash;
                 }
@@ -260,7 +264,14 @@ namespace Platformer.Mechanics
             }
             else if (stopDash)
             {
+                UnityEngine.Debug.Log("Stop dash!");
                 currentDashVelocity = 0;
+                stopDash = false;
+            }
+
+            if (currentDashVelocity == 0 && (IsGrounded || pressingAgainstWall))
+            {
+                currentDashDuration = 0;
             }
 
             tempDashVelocity = currentDashVelocity;
@@ -327,7 +338,9 @@ namespace Platformer.Mechanics
             {
                 wallJumping = againstWall && !IsGrounded;
                 if (wallJumping)
+                {
                     wallBoostDuration = wallJumpDuration;
+                }
                 FixYVelocity = false;
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
                 jump = false;
