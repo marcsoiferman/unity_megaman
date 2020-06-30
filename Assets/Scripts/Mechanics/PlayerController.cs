@@ -264,7 +264,6 @@ namespace Platformer.Mechanics
             }
             else if (stopDash)
             {
-                UnityEngine.Debug.Log("Stop dash!");
                 currentDashVelocity = 0;
                 stopDash = false;
             }
