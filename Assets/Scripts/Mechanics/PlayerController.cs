@@ -112,6 +112,9 @@ namespace Platformer.Mechanics
         private bool hitWallRight = false;
         private bool pressingAgainstWall = false;
 
+        public Transform FirePointForward;
+        public Transform FirePointBackwards;
+
         public Bounds Bounds => collider2d.bounds;
 
         public event Action OnRespawn;
@@ -163,10 +166,11 @@ namespace Platformer.Mechanics
             UpdateJumpState();
 
             FixYVelocity = false;
+            weapon.firePoint = FirePointForward;
             if (velocity.y < 0 && pressingAgainstWall)
             {
                 FixYVelocity = true;
-                FixedYVelocity = -1;
+                weapon.firePoint = FirePointBackwards;
             }
 
             base.Update();

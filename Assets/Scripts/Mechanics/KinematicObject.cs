@@ -54,7 +54,7 @@ namespace Platformer.Mechanics
         protected const float shellRadius = 0.01f;
 
         protected bool FixYVelocity = false;
-        protected float FixedYVelocity;
+        public float WallSlidingYVelocity;
 
         public void ResetGrounding()
         {
@@ -132,7 +132,7 @@ namespace Platformer.Mechanics
             velocity.x = targetVelocity.x;
 
             if (FixYVelocity)
-                velocity.y = FixedYVelocity;
+                velocity.y = WallSlidingYVelocity;
 
             if (wallBoostDuration > 0)
             {
