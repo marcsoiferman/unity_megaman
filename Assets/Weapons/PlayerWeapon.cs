@@ -13,18 +13,20 @@ namespace Assets.Weapons
     {
         public GameObject bulletPrefabCharged1;
         public GameObject bulletPrefabCharged2;
-        public PlayerController player { get; }
+        public PlayerController player;
         private bool charging = false;
         private Stopwatch chargeStopwatch = new Stopwatch();
         public ChargingState ChargeState;
 
         protected override void Update()
         {
+            bool shooting = false;
             deltaTime += Time.deltaTime;
             if (Input.GetButtonDown("Fire1"))
             {
                 ChargeState = ChargingState.Tier0;
                 Shoot(1);
+                shooting = true;
             }
             if (Input.GetButton("Fire1") && !charging)
             {
@@ -47,7 +49,10 @@ namespace Assets.Weapons
                         Shoot(3);
                         break;
                 }
+                shooting = true;
             }
+
+            player.animationController.SetShooting(shooting);
         }
 
         private void FixedUpdate()

@@ -26,40 +26,11 @@ public abstract class Weapon<T> :MonoBehaviour where T :Bullet
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (IsEnabled)
-        bool shooting = false;
-        deltaTime += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1"))
+        if(IsEnabled)
         {
             deltaTime += Time.deltaTime;
             Shoot(1);
-            shooting = true;
         }
-        if (Input.GetButton("Fire1") && !charging)
-        {
-            charging = true;
-            chargeStopwatch.Restart();
-        }
-        if (Input.GetButtonUp("Fire1") && charging)
-        {
-            charging = false;
-            chargeStopwatch.Stop();
-            switch(ChargeState)
-            {
-                case ChargingState.Tier0:
-                    Shoot(1);
-                    break;
-                case ChargingState.Tier1:
-                    Shoot(2);
-                    break;
-                case ChargingState.Tier2:
-                    Shoot(3);
-                    break;
-            }
-            shooting = true;
-        }
-
-        player.animationController.SetShooting(shooting);
     }
 
     protected void Shoot(float power)
