@@ -13,7 +13,9 @@ public class MegamanAnimationController : MonoBehaviour
         Running,
         Dashing,
         Jumping,
-        WallSliding
+        WallSliding,
+        Spawning,
+        Unspawning
     }
 
     // Start is called before the first frame update
@@ -30,12 +32,14 @@ public class MegamanAnimationController : MonoBehaviour
     public Sprite[] JumpingSpritesShooting;
 
     public Sprite[] SpawningSprites;
+    public Sprite[] UnspawningSprites;
 
     public Sprite[] WallSlidingSprites;
     public Sprite[] WallSlidingSpritesShooting;
 
     public int DashPauseFrame;
     public int JumpPauseFrame;
+    public int UnspawnPauseFrame;
 
     public int FrameCount;
 
@@ -60,6 +64,20 @@ public class MegamanAnimationController : MonoBehaviour
         }
     }
     private bool _IsSpawned;
+
+    public bool IsUnspawning
+    {
+        get => _IsUnspawning;
+        set
+        {
+            if (value != _IsUnspawning)
+            {
+                _IsUnspawning = value;
+                _mCurrentFrame = 0;
+            }
+        }
+    }
+    private bool _IsUnspawning;
 
     private bool _StopShootingTriggered;
     private bool IsShooting;
@@ -168,6 +186,11 @@ public class MegamanAnimationController : MonoBehaviour
                     case MotionState.WallSliding:
                         arr = WallSlidingSprites;
                         break;
+                    case MotionState.Unspawning:
+                        arr = UnspawningSprites;
+                        if (_mCurrentFrame > UnspawnPauseFrame)
+                            _mCurrentFrame = UnspawnPauseFrame;
+                        break;
                 }
             }
 
@@ -218,6 +241,9 @@ public class MegamanAnimationController : MonoBehaviour
 
     public MotionState DetermineState()
     {
+        if (IsUnspawning)
+            return MotionState.Unspawning;
+
         if (IsWallSliding && !IsGrounded)
             return MotionState.WallSliding;
 
@@ -246,5 +272,10 @@ public class MegamanAnimationController : MonoBehaviour
                 _StopShootingTime = 0;
             _StopShootingTriggered = true;
         }
+    }
+
+    public bool IsUnspawnAnimationComplete()
+    {
+        return (IsUnspawning && _mCurrentFrame >= UnspawnPauseFrame);
     }
 }

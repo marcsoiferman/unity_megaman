@@ -1,6 +1,7 @@
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
+using UnityEditor.SceneManagement;
 
 namespace Platformer.Gameplay
 {
@@ -19,6 +20,7 @@ namespace Platformer.Gameplay
         {
             //model.player.animator.SetTrigger("victory");
             model.player.controlEnabled = false;
+            model.player.WarpOut();
         }
     }
 }
