@@ -16,12 +16,14 @@ namespace Assets.Scripts
         int EnemyIndex { get; set; }
         bool IsAlive { get; }
         Vector3 StartingPosition { get; set; }
+
+        void SetCollision(bool collision);
+
         EnemyManager Manager { get; set; }
         Transform transform { get; }
         void Respawn();
         Bounds Bounds { get; }
         void Damage(int amount);
-        Collider2D _collider { get; }
         //AnimationController control { get; }
         Health health { get; }
         AudioSource _audio { get; }
