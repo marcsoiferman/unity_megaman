@@ -22,7 +22,7 @@ namespace Assets.Scripts
         Bounds Bounds { get; }
         void Damage(int amount);
         Collider2D _collider { get; }
-        AnimationController control { get; }
+        //AnimationController control { get; }
         Health health { get; }
         AudioSource _audio { get; }
         AudioClip ouch { get;}

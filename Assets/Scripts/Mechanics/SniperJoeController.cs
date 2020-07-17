@@ -11,13 +11,18 @@ using Platformer.Gameplay;
 using System;
 using System.Runtime.CompilerServices;
 using Assets.Weapons;
+using static Assets.Character.Sprites.Enemies.SniperJoe.SniperJoeAnimationController;
+using Assets.Character.Sprites.Enemies.SniperJoe;
 
-public class SniperJoeController : EnemyController, IEnemy
+public class SniperJoeController : EnemyController
 {
     public float ModeChangeTime => 5;
     public override float BounceAmount => 3;
     public override bool HurtByJump => false;
     public override int ContactDammage => 3;
+    public SniperJoeAnimationController animationController;
+    public Rigidbody2D body;
+
     public EnemyStance mode { get; set; }
     private float modeDeltaTime; 
 
@@ -25,9 +30,10 @@ public class SniperJoeController : EnemyController, IEnemy
     protected override void Awake()
     {
         base.Awake();
-        //_collider = GetComponents<Collider2D>()[1];
         weapon = GetComponent<SniperJoeWeapon>();
         weapon.FireCooldownSeconds = 1;
+        animationController = GetComponent<SniperJoeAnimationController>();
+        body = GetComponent<Rigidbody2D>();
     }
     // Start is called before the first frame update
     void Start() 
@@ -52,14 +58,14 @@ public class SniperJoeController : EnemyController, IEnemy
     private void AttackAction()
     {
         weapon.IsEnabled = true;
-        this.spriteRenderer.color = new Color(207, 0,4);
+        animationController.SetState(ActionState.Offensive);
         //shoot
     }
 
     private void DefensiveAction()
     {
         weapon.IsEnabled = false;
-        this.spriteRenderer.color = new Color(207, 206, 0);
+        animationController.SetState(ActionState.Defensive);
         //do nothing
     }
 
@@ -91,6 +97,13 @@ public class SniperJoeController : EnemyController, IEnemy
                 mode = EnemyStance.Attack;
                 break;
         }
+    }
+
+    public override void Respawn()
+    {
+        body.position = StartingPosition;
+        body.velocity *= 0;
+        base.Respawn();
     }
 
     public enum EnemyStance

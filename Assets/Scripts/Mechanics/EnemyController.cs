@@ -31,11 +31,11 @@ namespace Platformer.Mechanics
         public bool IsAlive => health.IsAlive;
 
         public Vector3 StartingPosition { get; set; }
-        protected Vector2 startingVelocity;
+        //protected Vector2 startingVelocity;
         protected Bounds startingBounds;
 
         internal PatrolPath.Mover mover;
-        public AnimationController control { get; protected set; }
+
         public Collider2D _collider { get; protected set; }
         public  AudioSource _audio { get; protected set; }
         public Health health { get; protected set; }
@@ -48,12 +48,10 @@ namespace Platformer.Mechanics
 
         protected virtual void Awake()
         {
-            control = GetComponent<AnimationController>();
             _collider = GetComponent<Collider2D>();
             _audio = GetComponent<AudioSource>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             StartingPosition = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z); 
-            startingVelocity = new Vector2(this.control.velocity.x,0);
             health = GetComponent<Health>();
         }
 
@@ -84,22 +82,14 @@ namespace Platformer.Mechanics
             contactDeltaTime = 0;
         }
 
-        public void Respawn()
+        public virtual void Respawn()
         {
             this._collider.enabled = true;
-            this.control.Teleport(StartingPosition);
-            this.control.enabled = true;
             health.Respawn(); 
         }
         protected virtual void Update()
         {
             contactDeltaTime += Time.deltaTime;
-
-            if (path != null)
-            {
-                if (mover == null) mover = path.CreateMover(control.maxSpeed * 0.5f);
-                control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
-            }
 
             if (_inContactPlayer != null)
                 SchedulePlayerCollision();
