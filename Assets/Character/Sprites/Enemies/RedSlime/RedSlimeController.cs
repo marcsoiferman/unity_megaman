@@ -15,7 +15,7 @@ namespace Assets.Character.Sprites.Enemies.RedBlob
 
         protected override void Awake()
         {
-            control.GetComponent<AnimationController>();
+            control = GetComponent<AnimationController>();
             base.Awake();
         }
 
