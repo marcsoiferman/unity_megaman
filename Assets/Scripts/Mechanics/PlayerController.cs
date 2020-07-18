@@ -412,7 +412,8 @@ namespace Platformer.Mechanics
             transform.Rotate(0f, 180f, 0f);
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+
+        private void OnTriggerStay2D(Collider2D collision)
         {
             Level level = collision.GetComponent<Level>();
             if (level != null)
