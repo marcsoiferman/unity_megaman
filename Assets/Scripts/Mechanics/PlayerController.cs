@@ -10,6 +10,7 @@ using TMPro;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using Assets.Weapons;
 using Cinemachine;
 using UnityEditor.SceneManagement;
 
@@ -100,8 +101,8 @@ namespace Platformer.Mechanics
         /*internal new*/ public AudioSource audioSource;
         /*internal new*/ public Collider2D wallCollider2d;
         public Health health;
+        PlayerWeapon weapon;
         public MegamanAnimationController animationController;
-        Weapon weapon;
         public bool controlEnabled = true;
 
         public bool dash;
@@ -132,7 +133,7 @@ namespace Platformer.Mechanics
             spriteRenderer = GetComponent<SpriteRenderer>();
             //animator = GetComponent<Animator>();
             animationController = GetComponent<MegamanAnimationController>();
-            weapon = GetComponent<Weapon>();
+            weapon = GetComponent<PlayerWeapon>();
         }
 
         protected override void Update()
@@ -154,6 +155,7 @@ namespace Platformer.Mechanics
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
                 {
+                    ForceLeaveEnemyContact();
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
                 }
@@ -251,7 +253,14 @@ namespace Platformer.Mechanics
             {
                 var ev = Schedule<HealthIsZero>();
                 ev.health = health;
+                ForceLeaveEnemyContact();
             }
+        }
+
+        public event Action HasLeftEnemyContact;
+        public void ForceLeaveEnemyContact()
+        {
+            HasLeftEnemyContact?.Invoke();
         }
 
         void UpdateDashState()
@@ -337,16 +346,16 @@ namespace Platformer.Mechanics
             {
                 switch (weapon.ChargeState)
                 {
-                    case Weapon.ChargingState.Tier0:
+                    case PlayerWeapon.ChargingState.Tier0:
                         spriteRenderer.color = DefaultColor;
                         break;
-                    case Weapon.ChargingState.Tier1:
+                    case PlayerWeapon.ChargingState.Tier1:
                         if (spriteRenderer.color != Stage1ChargingColor)
                             spriteRenderer.color = Stage1ChargingColor;
                         else
                             spriteRenderer.color = DefaultColor;
                         break;
-                    case Weapon.ChargingState.Tier2:
+                    case PlayerWeapon.ChargingState.Tier2:
                         if (spriteRenderer.color != Stage2ChargingColor)
                             spriteRenderer.color = Stage2ChargingColor;
                         else
@@ -416,6 +425,8 @@ namespace Platformer.Mechanics
         private void OnTriggerStay2D(Collider2D collision)
         {
             Level level = collision.GetComponent<Level>();
+            SetEnemyCollision(this, collision);
+
             if (level != null)
             {
                 wallJumping = false;
@@ -474,6 +485,8 @@ namespace Platformer.Mechanics
         private void OnTriggerExit2D(Collider2D collision)
         {
             Level level = collision.GetComponent<Level>();
+            SetEnemyCollision(null, collision);
+
             if (level != null)
             {
                 hitWallLeft = false;
@@ -481,6 +494,15 @@ namespace Platformer.Mechanics
                 pressingAgainstWall = false;
 
                 animationController.IsWallSliding = false;
+            }
+        }
+
+        private void SetEnemyCollision(PlayerController p, Collider2D collision)
+        {
+            EnemyController enemy = collision.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.SetPlayerCollision(p);
             }
         }
 

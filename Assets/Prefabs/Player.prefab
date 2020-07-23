@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8509783501685719824}
   - component: {fileID: 6082575806313374961}
   - component: {fileID: 1824045667}
+  - component: {fileID: 2092220612353215763}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -52,16 +53,32 @@ MonoBehaviour:
   minGroundNormalY: 0.9
   gravityModifier: 1
   velocity: {x: 0, y: 0}
+  wallJumpBoost: 2
+  wallJumpDuration: 10
   jumpAudio: {fileID: 8300000, guid: 67975c08d56ceb147bad38572d805aa8, type: 3}
   respawnAudio: {fileID: 8300000, guid: e18959d46b63f3c4c8cc020a433cf848, type: 3}
   ouchAudio: {fileID: 8300000, guid: 6c05149e5a2fba64ba172e25a61074b7, type: 3}
+  DefaultColor: {r: 0, g: 0, b: 0, a: 0}
+  Stage1ChargingColor: {r: 0, g: 0, b: 0, a: 0}
+  Stage2ChargingColor: {r: 0, g: 0, b: 0, a: 0}
+  ChargeFrames: 10
+  _scoreboard: {fileID: 0}
   maxSpeed: 3
   jumpTakeOffSpeed: 7
+  dashBoost: 2
+  dashAirBoost: 2
+  dashDuration: 15
+  dashDecay: 0.98
+  dashFloor: 0.7
+  currentDashDuration: 0
   jumpState: 0
+  dashState: 0
   collider2d: {fileID: 0}
   audioSource: {fileID: 0}
+  wallCollider2d: {fileID: 0}
   health: {fileID: 0}
   controlEnabled: 1
+  dash: 0
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,6 +93,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -87,6 +105,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -259,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 1
+  currentHP: 0
 --- !u!61 &1824045667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -285,3 +305,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.54}
   m_EdgeRadius: 0
+--- !u!114 &2092220612353215763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208144871472054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79cd4fde10e68f46a423610a2bd792b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 0}
+  bulletPrefabNormal: {fileID: 0}
+  FireCooldownSeconds: 0
+  MaxBullets: 0
+  bulletPrefabCharged1: {fileID: 0}
+  bulletPrefabCharged2: {fileID: 0}
+  ChargeState: 0

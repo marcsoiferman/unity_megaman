@@ -87,6 +87,9 @@ namespace Platformer.Mechanics
         /// <param name="position"></param>
         public void Teleport(Vector3 position)
         {
+            //if (body is null)// I dont' know why body is sometimes null, but its an issue.
+            //    return;
+
             body.position = position;
             velocity *= 0;
             body.velocity *= 0;

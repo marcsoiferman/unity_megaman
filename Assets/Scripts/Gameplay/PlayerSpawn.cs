@@ -12,10 +12,12 @@ namespace Platformer.Gameplay
     public class PlayerSpawn : Simulation.Event<PlayerSpawn>
     {
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        public static bool IsSpawning = false;
 
         public override void Execute()
         {
             var player = model.player;
+            IsSpawning = true;
             player.collider2d.enabled = true;
             player.controlEnabled = false;
             if (player.audioSource && player.respawnAudio)
@@ -30,7 +32,7 @@ namespace Platformer.Gameplay
             Simulation.Schedule<EnablePlayerInput>(2f);
             player.ResetScore();
             player.NotifyRespawn();
-
+            IsSpawning = false;
         }
     }
 }

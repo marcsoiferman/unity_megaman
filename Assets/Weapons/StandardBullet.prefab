@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 9130618751145163432}
   - component: {fileID: 9130618751145163433}
   - component: {fileID: 9130618751145163434}
-  - component: {fileID: 9130618751145163435}
   - component: {fileID: 9130618751145163444}
+  - component: {fileID: 5054854322608274395}
   m_Layer: 0
   m_Name: StandardBullet
   m_TagString: Untagged
@@ -106,25 +106,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &9130618751145163435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9130618751145163445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e7dee094dd37b46964a65f72bd80ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 8
-  rigidBody: {fileID: 9130618751145163434}
-  AnimatingSprites: []
-  LoopFrame: 0
-  FrameSeconds: 0
-  Explosion: {fileID: 5031131107611280150, guid: 04a237b83ba8dfd42a2bfb22c6716543,
-    type: 3}
 --- !u!70 &9130618751145163444
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -141,3 +122,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0008834825, y: -0.0001261904}
   m_Size: {x: 0.084795505, y: 0.06510972}
   m_Direction: 1
+--- !u!114 &5054854322608274395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130618751145163445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0499b29c170be447bd291e6fa6d3bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 8
+  rigidBody: {fileID: 9130618751145163434}
+  FrameMoveStart: 0
+  AnimatingSprites: []
+  LoopFrame: 0
+  FrameSeconds: 0
+  Explosion: {fileID: 5031131107611280150, guid: 04a237b83ba8dfd42a2bfb22c6716543,
+    type: 3}
