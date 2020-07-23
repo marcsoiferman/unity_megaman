@@ -1,4 +1,3 @@
-using Boo.Lang;
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
