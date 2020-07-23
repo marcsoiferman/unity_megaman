@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 {
     public float Speed = 20f;
     public Rigidbody2D rigidBody;
-    protected float power = 1;
+    private float power = 1;
     public int FrameMoveStart;
     public Sprite[] AnimatingSprites;
     public int LoopFrame;
@@ -65,5 +65,25 @@ public class Bullet : MonoBehaviour
                 _mRenderer.sprite = AnimatingSprites[_mCurrentFrame];
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        EnemyController enemy = collision.GetComponent<EnemyController>();
+        if (enemy != null)
+        {
+            enemy.Damage((int)power);
+            if (Explosion != null)
+            {
+                GameObject obj = Instantiate(Explosion, rigidBody.transform.position, rigidBody.transform.rotation);
+                
+            }
+            Destroy(gameObject);
+        }
+        //Level level = collision.GetComponent<Level>();
+        //if (level != null)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }

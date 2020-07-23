@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4301493211098739525}
   - component: {fileID: 5565643336994858494}
   - component: {fileID: 3807510933746447233}
+  - component: {fileID: -1218244060962250733}
   - component: {fileID: 4454348861053073243}
-  - component: {fileID: -8285570599625944537}
   m_Layer: 0
-  m_Name: PlayerBullet
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,8 +103,22 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &-1218244060962250733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475852897850564255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e7dee094dd37b46964a65f72bd80ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 10
+  rigidBody: {fileID: 3807510933746447233}
 --- !u!70 &4454348861053073243
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -121,22 +135,3 @@ CapsuleCollider2D:
   m_Offset: {x: 8.746355e-11, y: 0.0007336975}
   m_Size: {x: 0.16000007, y: 0.06262663}
   m_Direction: 1
---- !u!114 &-8285570599625944537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1475852897850564255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0499b29c170be447bd291e6fa6d3bbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 20
-  rigidBody: {fileID: 0}
-  FrameMoveStart: 0
-  AnimatingSprites: []
-  LoopFrame: 0
-  FrameSeconds: 0
-  Explosion: {fileID: 0}

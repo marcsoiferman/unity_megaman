@@ -10,23 +10,11 @@ namespace Assets.Scripts
 {
     public interface IEnemy
     {
-        float BounceAmount { get; }
-        bool HurtByJump {get;}
-        int ContactDammage { get; }
         int EnemyIndex { get; set; }
-        bool IsAlive { get; }
+        bool IsAlive { get;}
         Vector3 StartingPosition { get; set; }
-
-        void SetCollision(bool collision);
-
-        EnemyManager Manager { get; set; }
+        EnemyManager Manager {get; set; }
         Transform transform { get; }
         void Respawn();
-        Bounds Bounds { get; }
-        void Damage(int amount);
-        //AnimationController control { get; }
-        Health health { get; }
-        AudioSource _audio { get; }
-        AudioClip ouch { get;}
     }
 }

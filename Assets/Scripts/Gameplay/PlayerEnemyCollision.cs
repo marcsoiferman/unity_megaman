@@ -1,4 +1,3 @@
-using Assets.Scripts;
 using Assets.Scripts.Gameplay;
 using Platformer.Core;
 using Platformer.Mechanics;
@@ -15,32 +14,31 @@ namespace Platformer.Gameplay
     /// <typeparam name="EnemyCollision"></typeparam>
     public class PlayerEnemyCollision : Simulation.Event<PlayerEnemyCollision>
     {
-        public IEnemy enemy;
+        public EnemyController enemy;
         public PlayerController player;
 
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         public override void Execute()
         {
-            var willHurtEnemy = (player.Bounds.center.y >= enemy.Bounds.max.y) && enemy.HurtByJump;
-            float killBounce = 2;
+            var willHurtEnemy = player.Bounds.center.y >= enemy.Bounds.max.y;
 
             if (willHurtEnemy)
             {
                 enemy.Damage(3);
                 if (!enemy.IsAlive)
                 {
-                    player.Bounce(killBounce);
+                    player.Bounce(2);
                 }
                 else
                 {
-                    player.Bounce(enemy.BounceAmount);
+                    player.Bounce(7);
                 }
             }
             else
             {
                 player.PlayDamageAnimation();
-                player.Damage(enemy.ContactDammage);
+                player.Damage(1);
             }
         }
     }
