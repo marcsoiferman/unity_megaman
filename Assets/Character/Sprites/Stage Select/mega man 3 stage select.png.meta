@@ -1,0 +1,692 @@
+fileFormatVersion: 2
+guid: eb8938da97c919747a1a34f36954d964
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7382145290070195961
+    second: mega man 3 stage select_0
+  - first:
+      213: 8103261215484108652
+    second: mega man 3 stage select_1
+  - first:
+      213: 1759843413971586234
+    second: mega man 3 stage select_2
+  - first:
+      213: -1381388829983732680
+    second: mega man 3 stage select_3
+  - first:
+      213: 2222696671534143431
+    second: mega man 3 stage select_4
+  - first:
+      213: -2155382017603628517
+    second: mega man 3 stage select_5
+  - first:
+      213: -1115020667926856087
+    second: mega man 3 stage select_6
+  - first:
+      213: 2603766258487994946
+    second: mega man 3 stage select_7
+  - first:
+      213: 6318947482091791593
+    second: mega man 3 stage select_8
+  - first:
+      213: 500881076388551419
+    second: mega man 3 stage select_9
+  - first:
+      213: -8267022513829875542
+    second: mega man 3 stage select_10
+  - first:
+      213: -7579830214105811661
+    second: mega man 3 stage select_11
+  - first:
+      213: 2582623576350110114
+    second: mega man 3 stage select_12
+  - first:
+      213: -7311008600701017289
+    second: mega man 3 stage select_13
+  - first:
+      213: 8291436940126267766
+    second: mega man 3 stage select_14
+  - first:
+      213: -8668370486235841579
+    second: mega man 3 stage select_15
+  - first:
+      213: 1985707013649051506
+    second: mega man 3 stage select_16
+  - first:
+      213: 8473687009456360055
+    second: mega man 3 stage select_17
+  - first:
+      213: -6864194203484202638
+    second: mega man 3 stage select_18
+  - first:
+      213: 3811805721071400855
+    second: mega man 3 stage select_19
+  - first:
+      213: 6010517276372284266
+    second: mega man 3 stage select_20
+  - first:
+      213: 4949215969658440900
+    second: mega man 3 stage select_21
+  - first:
+      213: 4166180582747562466
+    second: mega man 3 stage select_22
+  - first:
+      213: -1823132942038389777
+    second: mega man 3 stage select_23
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mega man 3 stage select_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 189
+        width: 52
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7010b0198f95d8990800000000000000
+      internalID: -7382145290070195961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_1
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 198
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6f512f7421947070800000000000000
+      internalID: 8103261215484108652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_2
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 197
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abc461ec2483c6810800000000000000
+      internalID: 1759843413971586234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_3
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 194
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83c80249d2254dce0800000000000000
+      internalID: -1381388829983732680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 180
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c75c3ea8da98de10800000000000000
+      internalID: 2222696671534143431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_5
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 180
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b129875897b8612e0800000000000000
+      internalID: -2155382017603628517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 158
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96e30033c96a680f0800000000000000
+      internalID: -1115020667926856087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_7
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 156
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24a2353ed9f622420800000000000000
+      internalID: 2603766258487994946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_8
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 154
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e42e68714961b750800000000000000
+      internalID: 6318947482091791593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 147
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfadad86fac73f600800000000000000
+      internalID: 500881076388551419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_10
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 147
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa0730103d2a54d80800000000000000
+      internalID: -8267022513829875542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_11
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 147
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335337674980fc690800000000000000
+      internalID: -7579830214105811661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_12
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 118
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a1b5e8957257d320800000000000000
+      internalID: 2582623576350110114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_13
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 116
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 733e36db9641a8a90800000000000000
+      internalID: -7311008600701017289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_14
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 114
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67927c597f9111370800000000000000
+      internalID: 8291436940126267766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_15
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 114
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dbbe6248f2c3b780800000000000000
+      internalID: -8668370486235841579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_16
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 114
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27fad881206ae8b10800000000000000
+      internalID: 1985707013649051506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_17
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 81
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77a0d788075989570800000000000000
+      internalID: 8473687009456360055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_18
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 81
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27957007dbb7db0a0800000000000000
+      internalID: -6864194203484202638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_19
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 81
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79733458b1146e430800000000000000
+      internalID: 3811805721071400855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_20
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 65
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a63b4862e95a96350800000000000000
+      internalID: 6010517276372284266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_21
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 48
+        width: 52
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cc8e2cc3b52fa440800000000000000
+      internalID: 4949215969658440900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_22
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 31
+        width: 46
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e16cc8aa2f31d930800000000000000
+      internalID: 4166180582747562466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mega man 3 stage select_23
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 33
+        width: 48
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feb2d73af3ee2b6e0800000000000000
+      internalID: -1823132942038389777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

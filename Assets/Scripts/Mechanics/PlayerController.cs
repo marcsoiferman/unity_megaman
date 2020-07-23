@@ -10,6 +10,8 @@ using TMPro;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using Cinemachine;
+using UnityEditor.SceneManagement;
 
 namespace Platformer.Mechanics
 {
@@ -22,6 +24,8 @@ namespace Platformer.Mechanics
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
+
+        public CinemachineVirtualCamera Camera;
 
         public Color DefaultColor;
         public Color Stage1ChargingColor;
@@ -213,6 +217,27 @@ namespace Platformer.Mechanics
             }
         }
 
+        public void WarpOut()
+        {
+            StartCoroutine(ExecuteAfterTime(1, () =>
+            {
+                animationController.IsUnspawning = true;
+                Camera.Follow = null;
+
+                StartCoroutine(ExecuteAfterTime(3, () =>
+                {
+                    EditorSceneManager.LoadSceneAsync("StageSelect");
+                }));
+            }));
+        }
+
+        IEnumerator ExecuteAfterTime(float time, Action action)
+        {
+            yield return new WaitForSeconds(time);
+
+            action();
+        }
+
         public void PlayDamageAnimation()
         {
             //animator.SetTrigger("hurt");
@@ -333,6 +358,14 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
+            if (animationController.IsUnspawnAnimationComplete())
+            {
+                gravityModifier = 0;
+                velocity = new Vector2(0, 6f);
+                return;
+            }
+
+
             if (jump)//&& IsGrounded)
             {
                 wallJumping = againstWall && !IsGrounded;
@@ -379,7 +412,8 @@ namespace Platformer.Mechanics
             transform.Rotate(0f, 180f, 0f);
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+
+        private void OnTriggerStay2D(Collider2D collision)
         {
             Level level = collision.GetComponent<Level>();
             if (level != null)
