@@ -12,7 +12,7 @@ namespace Assets.Scripts
     {
         float BounceAmount { get; }
         bool HurtByJump {get;}
-        int ContactDammage { get; }
+        int ContactDamage { get; }
         int EnemyIndex { get; set; }
         bool IsAlive { get; }
         Vector3 StartingPosition { get; set; }

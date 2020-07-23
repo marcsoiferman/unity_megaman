@@ -19,10 +19,10 @@ namespace Platformer.Mechanics
         protected bool facingRight = false;
 
         public Component ComponentFacing;
-        public float ContactDammageCoolDownSeconds => 2;
+        public float ContactDamageCoolDownSeconds => 2;
         public virtual float BounceAmount => 7;
         public virtual bool HurtByJump => true;
-        public virtual int ContactDammage => 2;
+        public virtual int ContactDamage => 2;
         protected float contactDeltaTime;
         protected PlayerController _inContactPlayer;
 
@@ -72,7 +72,7 @@ namespace Platformer.Mechanics
 
         private void SchedulePlayerCollision()
         {
-            if (contactDeltaTime <= ContactDammageCoolDownSeconds)
+            if (contactDeltaTime <= ContactDamageCoolDownSeconds)
                 return;
 
             var ev = Schedule<PlayerEnemyCollision>();

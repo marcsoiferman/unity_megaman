@@ -19,14 +19,14 @@ public class SniperJoeController : EnemyController
     public float ModeChangeTime => 5;
     public override float BounceAmount => 3;
     public override bool HurtByJump => false;
-    public override int ContactDammage => 3;
+    public override int ContactDamage => 3;
     public SniperJoeAnimationController animationController;
     public Rigidbody2D body;
 
     public EnemyStance mode { get; set; }
     private float modeDeltaTime; 
 
-    SniperJoeWeapon weapon;
+    private SniperJoeWeapon weapon;
     protected override void Awake()
     {
         base.Awake();

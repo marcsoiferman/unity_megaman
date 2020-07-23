@@ -40,7 +40,7 @@ namespace Platformer.Gameplay
             else
             {
                 player.PlayDamageAnimation();
-                player.Damage(enemy.ContactDammage);
+                player.Damage(enemy.ContactDamage);
             }
         }
     }
