@@ -7,6 +7,74 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: Explosion
+      value: 
+      objectReference: {fileID: 4172197057613204009, guid: 0d22a3608c13c5f4eb44481ea9e39cc4,
+        type: 3}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: FrameMoveStart
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: -6108468808617680215, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 5619487256798038841, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: -1380148004999957638, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: -4606384160018768459, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 6653091457700542288, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[5]
+      value: 
+      objectReference: {fileID: 7401559982705190782, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: AnimatingSprites.Array.data[6]
+      value: 
+      objectReference: {fileID: 7017752382199225629, guid: c03878e11fdd0f043819e94740411104,
+        type: 3}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: LoopFrame
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5054854322608274395, guid: 714e21149122a4c44a462efe02e21316,
+        type: 3}
+      propertyPath: FrameSeconds
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 9130618751145163432, guid: 714e21149122a4c44a462efe02e21316,
         type: 3}
       propertyPath: m_LocalPosition.x

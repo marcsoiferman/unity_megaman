@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6649492202949290595}
   - component: {fileID: 5333268851559933605}
   - component: {fileID: 2102006754631332725}
-  - component: {fileID: 8290759217991706335}
+  - component: {fileID: 215915903745882723}
   - component: {fileID: 6447098943937346581}
   m_Layer: 0
   m_Name: StandardBulletCharged2
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8290759217991706335
+--- !u!114 &215915903745882723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2940537070680904541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e7dee094dd37b46964a65f72bd80ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e0499b29c170be447bd291e6fa6d3bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 8
