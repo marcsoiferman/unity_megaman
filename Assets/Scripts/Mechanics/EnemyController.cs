@@ -14,9 +14,11 @@ namespace Platformer.Mechanics
     /// A simple controller for enemies. Provides movement control over a patrol path.
     /// </summary>
     [RequireComponent(typeof(AnimationController), typeof(Collider2D))]
-    public class EnemyController : MonoBehaviour, IEnemy
+    public abstract class EnemyController : MonoBehaviour, IEnemy
     {
         protected bool facingRight = false;
+
+        public DeathType DeathType;
 
         public Component ComponentFacing;
         public float ContactDamageCoolDownSeconds => 2;
@@ -118,8 +120,26 @@ namespace Platformer.Mechanics
                 player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
                 Schedule<EnemyDeath>().enemy = this;
                 RemovePlayerCollision();
+
+                AnimateDeath();
             }
         }
+
+        private void AnimateDeath()
+        {
+            switch(DeathType)
+            {
+                case DeathType.Fall:
+                    break;
+                case DeathType.Explode:
+                    DisableEnemy();                   
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public abstract void DisableEnemy();
 
         internal void SetPlayerCollision(PlayerController p)
         {
@@ -152,5 +172,11 @@ namespace Platformer.Mechanics
         {
             _collider.enabled = false;
         }
+    }
+
+    public enum DeathType
+    {
+        Explode,
+        Fall
     }
 }

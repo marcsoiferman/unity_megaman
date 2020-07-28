@@ -34,6 +34,7 @@ public class SniperJoeController : EnemyController
         weapon.FireCooldownSeconds = 1;
         animationController = GetComponent<SniperJoeAnimationController>();
         body = GetComponent<Rigidbody2D>();
+        DeathType = DeathType.Explode;
     }
     // Start is called before the first frame update
     void Start() 
@@ -82,7 +83,6 @@ public class SniperJoeController : EnemyController
     {
         if (this.mode == EnemyStance.Defend)
             return;
-
         base.Damage(amount);
     }
 
@@ -99,8 +99,20 @@ public class SniperJoeController : EnemyController
         }
     }
 
+    public override void DisableEnemy()
+    {
+        this.spriteRenderer.enabled = false;
+        this.enabled = false;
+        this.weapon.enabled = false;
+        this.animationController.enabled = false;
+    }
+
     public override void Respawn()
     {
+        this.spriteRenderer.enabled = true;
+        this.enabled = true;
+        this.weapon.enabled = true;
+        this.animationController.enabled = true;
         body.position = StartingPosition;
         body.velocity *= 0;
         base.Respawn();
