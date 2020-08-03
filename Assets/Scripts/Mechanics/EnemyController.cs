@@ -125,7 +125,6 @@ namespace Platformer.Mechanics
                 death.enemy = this;
                 death.DeathObject = DeathObject;
 
-
                 RemovePlayerCollision();
 
                 AnimateDeath();
