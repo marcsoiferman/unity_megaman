@@ -17,10 +17,14 @@ namespace Assets.Weapons
         private bool charging = false;
         private Stopwatch chargeStopwatch = new Stopwatch();
         public ChargingState ChargeState;
+        public AudioClip chargingClip;
+        bool audioInUse = false;
 
         protected override void Update()
         {
             bool shooting = false;
+
+
             deltaTime += Time.deltaTime;
             if (Input.GetButtonDown("Fire1"))
             {
@@ -33,8 +37,12 @@ namespace Assets.Weapons
                 charging = true;
                 chargeStopwatch.Restart();
             }
+
+
             if (Input.GetButtonUp("Fire1") && charging)
             {
+                player.audioSource.Stop();
+                audioInUse = false;
                 charging = false;
                 chargeStopwatch.Stop();
                 switch (ChargeState)
@@ -60,6 +68,12 @@ namespace Assets.Weapons
             if (charging)
             {
                 long chargedMS = chargeStopwatch.ElapsedMilliseconds;
+
+                if (chargedMS > 200 && !player.audioSource.isPlaying)
+                {
+                    player.audioSource.PlayOneShot(chargingClip);
+                }
+
                 if (chargedMS > 2500)
                     ChargeState = ChargingState.Tier2;
                 else if (chargedMS > 1000)

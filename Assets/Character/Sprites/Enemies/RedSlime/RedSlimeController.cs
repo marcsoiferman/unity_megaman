@@ -22,6 +22,7 @@ namespace Assets.Character.Sprites.Enemies.RedBlob
 
         public override void Respawn()
         {
+            this.enabled = true;
             this.control.Teleport(StartingPosition);
             this.control.enabled = true;
             base.Respawn();
@@ -45,6 +46,7 @@ namespace Assets.Character.Sprites.Enemies.RedBlob
         public override void DisableEnemy()
         {
             this.enabled = false;
+            this.control.enabled = false;
         }
     }
 }

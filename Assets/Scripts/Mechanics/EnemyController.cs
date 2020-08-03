@@ -20,6 +20,8 @@ namespace Platformer.Mechanics
 
         public DeathType DeathType;
 
+        public GameObject DeathObject;
+
         public Component ComponentFacing;
         public float ContactDamageCoolDownSeconds => 2;
         public virtual float BounceAmount => 7;
@@ -118,7 +120,12 @@ namespace Platformer.Mechanics
             {
                 PlayerController player = UnityEngine.Object.FindObjectOfType<PlayerController>();
                 player.UpdateScore(ScoreHelper.SLIME_ENEMY_POINTS);
-                Schedule<EnemyDeath>().enemy = this;
+ 
+                var death = Schedule<EnemyDeath>();
+                death.enemy = this;
+                death.DeathObject = DeathObject;
+
+
                 RemovePlayerCollision();
 
                 AnimateDeath();
