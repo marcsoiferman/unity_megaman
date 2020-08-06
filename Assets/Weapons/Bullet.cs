@@ -18,9 +18,12 @@ public class Bullet : MonoBehaviour
     private float deltaTime;
     public GameObject Explosion;
     private bool moving;
+    protected AudioSource _audio;
+    public AudioClip DeflectSound;
+    public AudioClip ShootSound;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         moving = false;
         if (FrameMoveStart <= 0)
@@ -29,8 +32,10 @@ public class Bullet : MonoBehaviour
             moving = true;
         }
         _mRenderer = GetComponent<SpriteRenderer>();
+        _audio = GetComponent<AudioSource>();
         _mCurrentFrame = 0;
         deltaTime = 0;
+        PlaySound(BulletSound.Shoot);
     }
 
     public void SetPower(float power)
@@ -65,5 +70,75 @@ public class Bullet : MonoBehaviour
                 _mRenderer.sprite = AnimatingSprites[_mCurrentFrame];
             }
         }
+    }
+
+    public void Deflect(double angle, bool disableCollistion = true)
+    {
+        PlaySound(BulletSound.Deflect);
+        _mRenderer.flipX = !_mRenderer.flipX;
+
+        angle = 145;
+
+        double currentX = rigidBody.velocity.x;
+        double currentY = rigidBody.velocity.y;
+
+        float initialRad;
+
+        if (currentY == 0)
+        {
+            if (currentX > 0)
+                initialRad = 0;
+            else if (currentX < 0)
+                initialRad = (float)Math.PI;
+            else
+                initialRad = 0;
+        }
+        else if( currentX ==0)
+        {
+            if (currentY > 0)
+                initialRad = (1 / 2) * (float) Math.PI;
+            else
+                initialRad = (3 / 2) * (float)Math.PI;
+        }
+        else
+        {
+            initialRad = (float)Math.Atan(currentY / currentX);
+        }
+
+
+        double newRad = angle * Math.PI / 180;
+        double finalRad = (initialRad) + (Math.Sign(currentX) * newRad);
+
+        float x = (float)Math.Cos(finalRad);
+        float y = (float)Math.Sin(finalRad);
+
+        rigidBody.velocity = new Vector2(x, y) * Speed;
+
+        if (disableCollistion)
+            DisableCollision();
+    }
+
+    protected virtual void PlaySound(BulletSound sound)
+    {
+        switch(sound)
+        {
+            case BulletSound.Deflect:
+                _audio.PlayOneShot(DeflectSound);
+                break;
+            case BulletSound.Shoot:
+                _audio.PlayOneShot(ShootSound);
+                break;
+        }
+    }
+
+    private void DisableCollision()
+    {
+        CapsuleCollider2D collider = this.GetComponent<CapsuleCollider2D>();
+        collider.enabled = false;
+    }
+
+    public enum BulletSound
+    {
+        Deflect, Shoot
     }
 }

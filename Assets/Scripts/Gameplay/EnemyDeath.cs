@@ -1,6 +1,8 @@
 using Assets.Scripts;
 using Platformer.Core;
 using Platformer.Mechanics;
+using System.ComponentModel;
+using UnityEngine;
 
 namespace Platformer.Gameplay
 {
@@ -10,7 +12,8 @@ namespace Platformer.Gameplay
     /// <typeparam name="EnemyDeath"></typeparam>
     public class EnemyDeath : Simulation.Event<EnemyDeath>
     {
-        public IEnemy enemy;
+        public EnemyController enemy;
+        public GameObject DeathObject;
 
         public override void Execute()
         {
@@ -18,6 +21,13 @@ namespace Platformer.Gameplay
             enemy.health.Die();
             if (enemy._audio && enemy.ouch)
                 enemy._audio.PlayOneShot(enemy.ouch);
+                        
+                if (DeathObject != null)
+                {
+                    Rigidbody2D rigidBody = enemy.GetComponent<Rigidbody2D>();
+                    DeathObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                    GameObject obj = GameObject.Instantiate(DeathObject, rigidBody.transform.position, rigidBody.transform.rotation);
+                }
         }
     }
 }

@@ -13,8 +13,9 @@ using System.Runtime.CompilerServices;
 using Assets.Weapons;
 using static Assets.Character.Sprites.Enemies.SniperJoe.SniperJoeAnimationController;
 using Assets.Character.Sprites.Enemies.SniperJoe;
+using Assets.Interfaces;
 
-public class SniperJoeController : EnemyController
+public class SniperJoeController : EnemyController, IDeflectable
 {
     public float ModeChangeTime => 5;
     public override float BounceAmount => 3;
@@ -22,6 +23,14 @@ public class SniperJoeController : EnemyController
     public override int ContactDamage => 3;
     public SniperJoeAnimationController animationController;
     public Rigidbody2D body;
+
+    public bool IsDeflecting
+    {
+        get
+        {
+            return animationController.AnimationState == ActionState.Defensive;
+        }
+    }
 
     public EnemyStance mode { get; set; }
     private float modeDeltaTime; 
@@ -34,6 +43,7 @@ public class SniperJoeController : EnemyController
         weapon.FireCooldownSeconds = 1;
         animationController = GetComponent<SniperJoeAnimationController>();
         body = GetComponent<Rigidbody2D>();
+        DeathType = DeathType.Explode;
     }
     // Start is called before the first frame update
     void Start() 
@@ -82,7 +92,6 @@ public class SniperJoeController : EnemyController
     {
         if (this.mode == EnemyStance.Defend)
             return;
-
         base.Damage(amount);
     }
 
@@ -99,8 +108,20 @@ public class SniperJoeController : EnemyController
         }
     }
 
+    public override void DisableEnemy()
+    {
+        this.spriteRenderer.enabled = false;
+        this.enabled = false;
+        this.weapon.enabled = false;
+        this.animationController.enabled = false;
+    }
+
     public override void Respawn()
     {
+        this.spriteRenderer.enabled = true;
+        this.enabled = true;
+        this.weapon.enabled = true;
+        this.animationController.enabled = true;
         body.position = StartingPosition;
         body.velocity *= 0;
         base.Respawn();

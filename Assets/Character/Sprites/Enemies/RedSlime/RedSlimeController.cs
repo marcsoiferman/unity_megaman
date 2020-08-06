@@ -16,11 +16,13 @@ namespace Assets.Character.Sprites.Enemies.RedBlob
         protected override void Awake()
         {
             control = GetComponent<AnimationController>();
+            DeathType = DeathType.Fall;
             base.Awake();
         }
 
         public override void Respawn()
         {
+            this.enabled = true;
             this.control.Teleport(StartingPosition);
             this.control.enabled = true;
             base.Respawn();
@@ -40,6 +42,11 @@ namespace Assets.Character.Sprites.Enemies.RedBlob
         {
             _collider.enabled = false;
             control.enabled = false;
+        }
+        public override void DisableEnemy()
+        {
+            this.enabled = false;
+            this.control.enabled = false;
         }
     }
 }
